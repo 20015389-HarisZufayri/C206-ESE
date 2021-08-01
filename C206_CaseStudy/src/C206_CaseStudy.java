@@ -23,16 +23,16 @@ public class C206_CaseStudy {
 				// Manage User
 				manageUser();
 
-			} else if (option == 2) {
+//			} else if (option == 2) {
 				// Manage Package
 
-			} else if (option == 3) {
+//			} else if (option == 3) {
 				// Manage Request for quotation
 
-			} else if (option == 4) {
-				// Manage Quotation
-
-			} else if (option == 5) {
+//			} else if (option == 4) {
+//				// Manage Quotation
+//
+//			} else if (option == 5) {
 				// Manage Appointment
 				manageApp();
 
