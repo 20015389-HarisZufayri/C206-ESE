@@ -78,7 +78,7 @@ public class C206_CaseStudyTest {
 		
 		//Should only have 1 Customer the other being designer
 		allCustomer= C206_CaseStudy.retrieveAllCustomer(userList);
-		testOutput = String.format("%-10s %-10s %-20s %-10s\n","Shino", "9395-9352", "shino@gmail.com", "New");
+		testOutput = String.format("%-10s %-10s %-20s %s\n","Shino", "9395-9352", "shino@gmail.com", "New");
 	
 		assertEquals("Test that ViewAllCamcorderlist", testOutput, allCustomer);
 		
@@ -98,7 +98,7 @@ public class C206_CaseStudyTest {
 		
 		//Should only have 1 Designer the other being Customer
 		allDesigner= C206_CaseStudy.retrieveAllDesigner(userList);
-		testOutput = String.format("%-10s %-10s %s\n","Kuro", "9395-9312", "kuroRA@gmail.com");
+		testOutput = String.format("%-10s %-10s %-20s\n","Kuro", "9395-9312", "kuroRA@gmail.com");
 	
 		assertEquals(testOutput, allDesigner);
 		

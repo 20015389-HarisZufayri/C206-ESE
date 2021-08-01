@@ -128,8 +128,7 @@ public class C206_CaseStudy {
 		for (User u : userList) {
 			if (u instanceof Customer) {
 				Customer c = (Customer) u;
-				output += String.format("%-10s %-10s %-20s %-10s\n", c.getName(), c.getNumber(), c.getEmail(),
-						c.getStatus());
+				output += String.format("%s", c.doString());
 
 			}
 		}
@@ -150,7 +149,7 @@ public class C206_CaseStudy {
 		for (User u : userList) {
 			if (u instanceof Designer) {
 				Designer d = (Designer) u;
-				output += String.format("%-10s %-10s %s\n", d.getName(), d.getNumber(), d.getEmail());
+				output += String.format("%s\n", d.doString());
 
 			}
 		}
@@ -159,7 +158,7 @@ public class C206_CaseStudy {
 
 	public static void viewAllDesigner(ArrayList<User> userList) {
 		C206_CaseStudy.setHeader("DESIGNER LIST");
-		String output = String.format("%-10s %-10s %s\n", "NAME", "NUMBER", "EMAIL");
+		String output = String.format("%-10s %-10s %-20s\n", "NAME", "NUMBER", "EMAIL");
 		output += retrieveAllDesigner(userList);
 		System.out.println(output);
 	}
@@ -216,12 +215,15 @@ public class C206_CaseStudy {
 		Appointment a1 = null;
 
 		boolean check = false;
+		
 		String name = Helper.readStringRegEx("Enter Name > ", "\\D{3,}");
+		
 		if (checkUser(name)) {
 			String address = Helper.readStringRegEx("Enter Address > ", "\\D{1,}");
 			String date = Helper.readStringRegEx("Enter date [yyyy-MM-dd] > ", "\\d{4}-\\d{2}-\\d{2}");
 			String time = Helper.readStringRegEx("Enter time [0000] > ", "\\d{4}");
 			int t2 = Integer.parseInt(time);
+			
 			while (check == false) {
 
 				C206_CaseStudy.viewAllDesigner(userList);
@@ -262,13 +264,14 @@ public class C206_CaseStudy {
 		String output = "";
 
 		for (Appointment a : appList) {
-
-			output += String.format("%-10s %-10s %-10d %-10s %s\n", a.getCustName(), a.getDate(), a.getTime(),
-					a.getDesigner(), a.getAddress());
+			
+			output += String.format("%s",a.doString2());
 
 		}
 		return output;
 	}
+	
+	
 
 	public static void viewAllAppointment(ArrayList<Appointment> appList) {
 		C206_CaseStudy.setHeader("APPOINTMENT LIST");
@@ -295,6 +298,7 @@ public class C206_CaseStudy {
 		return null;
 	}
 
+	
 	public static void deleteApp(ArrayList<Appointment> appList, Appointment a1) {
 		if (appList.remove(a1)) {
 			System.out.println("Appointment successfully deleted");
@@ -304,6 +308,8 @@ public class C206_CaseStudy {
 
 	}
 
+
+	// Used to validate user is in system
 	private static boolean checkUser(String user) {
 		boolean check = false;
 		for (User u : userList) {

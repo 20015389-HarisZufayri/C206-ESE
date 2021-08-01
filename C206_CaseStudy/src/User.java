@@ -28,5 +28,7 @@ public class User {
 		return role;
 	}
 	
-	
+	public String doString() {
+		return String.format("%-10s %-10s %-20s", getName(), getNumber(),getEmail());
+	}
 }

@@ -23,5 +23,9 @@ public class Customer extends User {
 		return Status;
 	}
 	
+	public String doString() {
+		String mainInfo = super.doString();
+		return String.format("%s %s\n", mainInfo, getStatus()); 
+	}
 	
 }
