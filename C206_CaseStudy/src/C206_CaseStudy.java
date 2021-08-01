@@ -257,7 +257,7 @@ public class C206_CaseStudy {
 		}
 	}
 
-	// ---<< MANAGE APPOINTMENT: VIEW APPOINTMENT >>---// Done by: Yolanda
+	// ---<< MANAGE APPOINTMENT: VIEW APPOINTMENT >>---// Done by: Yolanda 
 	public static String retrieveAllAppointment(ArrayList<Appointment> appList) {
 		String output = "";
 
