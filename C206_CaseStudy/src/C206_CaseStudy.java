@@ -123,13 +123,17 @@ public class C206_CaseStudy {
 		String mobile = Helper.readString("Enter mobile [0000-0000] > ");
 		String email = Helper.readString("Enter email > ");
 		String role = Helper.readString("Enter role > ");
+		
+		if (!(name.equals("") && !(mobile.equals("")) && !(email.equals("")) && !(role.equals("")))) {
+			if (role.equalsIgnoreCase("Customer") || role.equalsIgnoreCase("Client")) {
+				u1 = new Customer(name, mobile, email, role);
 
-		if (role.equalsIgnoreCase("Customer") || role.equalsIgnoreCase("Client")) {
-			u1 = new Customer(name, mobile, email, role);
+			} else if (role.equalsIgnoreCase("Designer")) {
+				u1 = new Designer(name, mobile, email, role);
 
-		} else if (role.equalsIgnoreCase("Designer")) {
-			u1 = new Designer(name, mobile, email, role);
-
+			}
+		} else {
+			System.out.println("Invalid input");
 		}
 		return u1;
 
@@ -137,7 +141,7 @@ public class C206_CaseStudy {
 
 	public static void addUser(ArrayList<User> userList, User u1) {
 
-		if (userList.add(u1)) {
+		if (u1 != null && userList.add(u1)) {
 			System.out.println("User successfully added");
 		}
 	}
@@ -192,6 +196,7 @@ public class C206_CaseStudy {
 			for (User u : userList) {
 				if (u.getName().equals(name)) {
 					u1 = u;
+					
 				}
 			}
 		} else {
@@ -201,10 +206,11 @@ public class C206_CaseStudy {
 	}
 
 	public static void deleteUser(ArrayList<User> userList, User u1) {
-		if (userList.remove(u1)) {
+		if (u1 != null && userList.remove(u1)) {
 			System.out.println("User successfully deleted");
-		} else {
-			System.out.println("Invalid user");
+		}
+		else {
+			System.out.println("Invalid user for deletion");
 		}
 
 	}
@@ -216,15 +222,15 @@ public class C206_CaseStudy {
 		String name = Helper.readString("Enter Name > ");
 		if (checkUser(name)) {
 			a1 = checkDesigner(name);
+			return a1;
 		} else {
 			System.out.println("User is not registered");
-			inputApp();
 		}
-		return a1;
+		return null;
 	}
 
 	public static void addApp(ArrayList<Appointment> appList, Appointment a1) {
-		if (appList.add(a1)) {
+		if (a1 != null && appList.add(a1)) {
 			System.out.println("Appointment successfully added");
 		}
 	}
@@ -257,6 +263,9 @@ public class C206_CaseStudy {
 				for (Appointment a : appList) {
 					if (a.getCustName().equals(name)) {
 						return a;
+						
+					} else {
+						System.out.println("Unable to delete appointment");
 					}
 				}
 			}
@@ -267,12 +276,9 @@ public class C206_CaseStudy {
 	}
 
 	public static void deleteApp(ArrayList<Appointment> appList, Appointment a1) {
-		if (appList.remove(a1)) {
+		if (a1 != null && appList.remove(a1)) {
 			System.out.println("Appointment successfully deleted");
-		} else {
-			System.out.println("Unable to delete appointment");
-		}
-
+		} 
 	}
 
 	// Validate Customer is in system
@@ -299,6 +305,8 @@ public class C206_CaseStudy {
 		Appointment a1 = null;
 
 		boolean check = false;
+		
+
 		
 		String address = "";
 		String designer = "";
@@ -345,7 +353,7 @@ public class C206_CaseStudy {
 
 		// Create new Appointment object
 		if (check == true) {
-			a1 = new Appointment(name, time, t2, designer, address);
+			a1 = new Appointment(name, date, t2, designer, address);
 		}
 
 		return a1;
