@@ -23,58 +23,27 @@ public class C206_CaseStudy {
 				// Manage User
 				C206_CaseStudy.manageUser();
 
-				int Choice = Helper.readInt("Enter an option > ");
+				
 
-				if (Choice == 1) {
-					User u1 = inputUser();
-					C206_CaseStudy.addUser(userList, u1);
-				} else if (Choice == 2) {
-					C206_CaseStudy.viewAllCustomer(userList);
-					C206_CaseStudy.viewAllDesigner(userList);
-				} else if (Choice == 3) {
-					User u1 = C206_CaseStudy.inputDeleteUser();
-					C206_CaseStudy.deleteUser(userList, u1);
-				} else if (Choice == 4) {
-					C206_CaseStudy.menu();
-				} else if (Choice > 4 || Choice < 0) {
-					System.out.println("Invalid option");
-					C206_CaseStudy.menu();
-
-				}
-
-//			} else if (option == 2) {
+			} else if (option == 2) {
 				// Manage Package
 
-//			} else if (option == 3) {
+			} else if (option == 3) {
 				// Manage Request for quotation
 
-//			} else if (option == 4) {
-//				// Manage Quotation
-//
-//			} else if (option == 5) {
-//				// Manage Appointment
-//				C206_CaseStudy.manageApp();
-//				
-//				int cApp = Helper.readInt("Enter an option > ");
-//
-//				if (cApp == 1) {
-//					Appointment a1 = inputApp();
-//					C206_CaseStudy.addApp(appList, a1);
-//				} else if (cApp == 2) {
-//					C206_CaseStudy.viewAllAppointment(appList);
-//
-//				} else if (cApp == 3) {
-//					Appointment a1 = C206_CaseStudy.inputDeleteApp();
-//					C206_CaseStudy.deleteApp(appList, a1);
-//
+			} else if (option == 4) {
+				// Manage Quotation
+
+			} else if (option == 5) {
+				// Manage Appointment
+				C206_CaseStudy.manageApp();
+				
 			} else if (option == 6) {
 				System.out.println("Logging off. . .");
 			} else {
 				System.out.println("Invalid option");
 			}
-
 		}
-
 	}
 
 	public static void menu() {
@@ -102,6 +71,25 @@ public class C206_CaseStudy {
 		System.out.println("3. Delete User");
 		System.out.println("4. Back");
 		Helper.line(80, "-");
+		
+		int Choice = Helper.readInt("Enter an option > ");
+
+		if (Choice == 1) {
+			User u1 = inputUser();
+			C206_CaseStudy.addUser(userList, u1);
+		} else if (Choice == 2) {
+			C206_CaseStudy.viewAllCustomer(userList);
+			C206_CaseStudy.viewAllDesigner(userList);
+		} else if (Choice == 3) {
+			User u1 = C206_CaseStudy.inputDeleteUser();
+			C206_CaseStudy.deleteUser(userList, u1);
+		} else if (Choice == 4) {
+			C206_CaseStudy.menu();
+		} else if (Choice > 4 || Choice < 0) {
+			System.out.println("Invalid option");
+			C206_CaseStudy.menu();
+
+		}
 	}
 
 	// ---<< MANAGE APPOINTMNET MENU >>---// Done by: Yolanda
@@ -112,6 +100,19 @@ public class C206_CaseStudy {
 		System.out.println("3. Delete Appointment");
 		System.out.println("4. Back");
 		Helper.line(80, "-");
+		
+		int cApp = Helper.readInt("Enter an option > ");
+
+		if (cApp == 1) {
+			Appointment a1 = inputApp();
+			C206_CaseStudy.addApp(appList, a1);
+		} else if (cApp == 2) {
+			C206_CaseStudy.viewAllAppointment(appList);
+
+		} else if (cApp == 3) {
+			Appointment a1 = C206_CaseStudy.inputDeleteApp();
+			C206_CaseStudy.deleteApp(appList, a1);
+		}
 	}
 
 	// ---<< MANAGE USER: ADD USER >>---// Done by: Yolanda
@@ -125,21 +126,22 @@ public class C206_CaseStudy {
 
 		if (role.equalsIgnoreCase("Customer") || role.equalsIgnoreCase("Client")) {
 			u1 = new Customer(name, mobile, email, role);
-			
+
 		} else if (role.equalsIgnoreCase("Designer")) {
 			u1 = new Designer(name, mobile, email, role);
-	
+
 		}
 		return u1;
 
 	}
+
 	public static void addUser(ArrayList<User> userList, User u1) {
 
 		if (userList.add(u1)) {
 			System.out.println("User successfully added");
 		}
 	}
-	
+
 	// ---<< MANAGE USER: VIEW CUSTOMER >>---// Done by: Yolanda
 	public static String retrieveAllCustomer(ArrayList<User> userList) {
 		String output = "";
@@ -182,7 +184,6 @@ public class C206_CaseStudy {
 		System.out.println(output);
 	}
 
-	
 	// ---<< MANAGE USER: DELETE USER >>---// Done by: Yolanda
 	public static User inputDeleteUser() {
 		User u1 = null;
@@ -205,149 +206,149 @@ public class C206_CaseStudy {
 		} else {
 			System.out.println("Invalid user");
 		}
-		
+
 	}
 
 	// ---<< MANAGE APPOINTMENT: ADD APPOINTMENT >>---// Done by: Yolanda
-//	public static Appointment inputApp() {
-//		Appointment a1 = null;
-//
-//		String name = Helper.readStringRegEx("Enter Name > ", "\\D{3,}");
-//		if (checkUser(name)) {
-//			String address = Helper.readStringRegEx("Enter address > ", "^(?!\\s*$).+");
-//
-//			a1 = checkDesigner(name, address);
-//		} else {
-//			System.out.println("User is not registered");
-//			inputApp();
-//		}
-//		return a1;
-//	}
-//
-//	public static void addApp(ArrayList<Appointment> appList, Appointment a1) {
-//		if (appList.add(a1)) {
-//			System.out.println("Appointment successfully added");
-//		}
-//	}
+	public static Appointment inputApp() {
+		Appointment a1 = null;
+
+		String name = Helper.readString("Enter Name > ");
+		if (checkUser(name)) {
+			a1 = checkDesigner(name);
+		} else {
+			System.out.println("User is not registered");
+			inputApp();
+		}
+		return a1;
+	}
+
+	public static void addApp(ArrayList<Appointment> appList, Appointment a1) {
+		if (appList.add(a1)) {
+			System.out.println("Appointment successfully added");
+		}
+	}
 
 	// ---<< MANAGE APPOINTMENT: VIEW APPOINTMENT >>---// Done by: Yolanda
-//	public static String retrieveAllAppointment(ArrayList<Appointment> appList) {
-//		String output = "";
-//
-//		for (Appointment a : appList) {
-//
-//			output += String.format("%s", a.doString2());
-//
-//		}
-//		return output;
-//	}
-//
-//	public static void viewAllAppointment(ArrayList<Appointment> appList) {
-//		C206_CaseStudy.setHeader("APPOINTMENT LIST");
-//		String output = String.format("%-10s %-10s %-10s %-10s %s\n", "NAME", "DATE", "TIME", "DESIGNER", "ADDRESS");
-//		output += retrieveAllAppointment(appList);
-//		System.out.println(output);
-//	}
+	public static String retrieveAllAppointment(ArrayList<Appointment> appList) {
+		String output = "";
+
+		for (Appointment a : appList) {
+
+			output += String.format("%s", a.doString2());
+
+		}
+		return output;
+	}
+
+	public static void viewAllAppointment(ArrayList<Appointment> appList) {
+		C206_CaseStudy.setHeader("APPOINTMENT LIST");
+		String output = String.format("%-10s %-10s %-10s %-10s %s\n", "NAME", "DATE", "TIME", "DESIGNER", "ADDRESS");
+		output += retrieveAllAppointment(appList);
+		System.out.println(output);
+	}
 
 	// ---<< MANAGE APPOINTMENT: DELETE APPOINTMENT >>---// Done by: Yolanda
-//	public static Appointment inputDeleteApp() {
-//
-//		if (appList.size() != 0) {
-//			String name = Helper.readStringRegEx("Enter name > ", "\\D{3,}");
-//			if (checkUser(name)) {
-//				for (Appointment a : appList) {
-//					if (a.getCustName().equals(name)) {
-//						return a;
-//					}
-//				}
-//			}
-//		} else {
-//			System.out.println("There are no appointments");
-//		}
-//		return null;
-//	}
+	public static Appointment inputDeleteApp() {
 
-//	public static void deleteApp(ArrayList<Appointment> appList, Appointment a1) {
-//		if (appList.remove(a1)) {
-//			System.out.println("Appointment successfully deleted");
-//		} else {
-//			System.out.println("Unable to delete appointment");
-//		}
-//
-//	}
+		if (appList.size() != 0) {
+			String name = Helper.readString("Enter name > ");
+			if (checkUser(name)) {
+				for (Appointment a : appList) {
+					if (a.getCustName().equals(name)) {
+						return a;
+					}
+				}
+			}
+		} else {
+			System.out.println("There are no appointments");
+		}
+		return null;
+	}
+
+	public static void deleteApp(ArrayList<Appointment> appList, Appointment a1) {
+		if (appList.remove(a1)) {
+			System.out.println("Appointment successfully deleted");
+		} else {
+			System.out.println("Unable to delete appointment");
+		}
+
+	}
 
 	// Validate Customer is in system
-//	private static boolean checkUser(String user) {
-//		boolean check = false;
-//		for (User u : userList) {
-//			if (u instanceof Customer) {
-//				Customer c = (Customer) u;
-//				if (c.getName().equals(user)) {
-//					check = true;
-//					break;
-//				} else {
-//					check = false;
-//				}
-//			}
-//		}
-//		return check;
-//	}
+	private static boolean checkUser(String user) {
+		boolean check = false;
+		for (User u : userList) {
+			if (u instanceof Customer) {
+				Customer c = (Customer) u;
+				if (c.getName().equals(user)) {
+					check = true;
+					break;
+				} else {
+					check = false;
+				}
+			}
+		}
+		return check;
+	}
 
 	// Valid Designer is registered and if they have existing appointment on same
 	// input date/time
-//	public static Appointment checkDesigner(String name, String address) {
-//
-//		Appointment a1 = null;
-//
-//		boolean check = false;
-//
-//		String designer = "";
-//		String date = "";
-//		String time = "";
-//		int t2 = 0;
-//
-//		date = Helper.readStringRegEx("Enter date [yyyy-MM-dd] > ", "^\\d{4}-(0?[1-9]|1[012])-(0[1-9]|[12]\\d|3[01])");
-//		time = Helper.readStringRegEx("Enter time [0000] > ", "([01]?[0-9]|2[0-3])[0-5][0-9]");
-//		t2 = Integer.parseInt(time);
-//
-//		while (check != true) {
-//			viewAllDesigner(userList);
-//			designer = Helper.readString("Enter designer name > ");
-//
-//			for (User u : userList) {
-//				if (u.getName().equals(designer)) {
-//					if (appList.size() != 0) {
-//						for (Appointment a : appList) {
-//							if (a.getDesigner().equals(designer) && a.getDate().equals(date) && a.getTime() == t2) {
-//								// Designer already have existing appointment
-//								System.out.println("Designer already has an appointment on this date and time");
-//
-//							} else if (!(a.getDesigner().equals(designer))) {
-//								// Cannot find designer in appointment list
-//								check = true;
-//								break;
-//							} else if (a.getDesigner().equals(designer)) {
-//
-//								// Designer is free
-//								check = true;
-//								break;
-//							}
-//						}
-//					} else {
-//						check = true;
-//						break;
-//					}
-//				}
-//			}
-//
-//		}
-//
-//		// Create new Appointment object
-//		if (check == true) {
-//			a1 = new Appointment(name, time, t2, designer, address);
-//		}
-//
-//		return a1;
-//	}
+	public static Appointment checkDesigner(String name) {
+
+		Appointment a1 = null;
+
+		boolean check = false;
+		
+		String address = "";
+		String designer = "";
+		String date = "";
+		String time = "";
+		int t2 = 0;
+		
+		address = Helper.readString("Enter address > ");
+		date = Helper.readString("Enter date [yyyy-MM-dd] > ");
+		time = Helper.readString("Enter time [0000] > ");
+		t2 = Integer.parseInt(time);
+
+		while (check != true) {
+			viewAllDesigner(userList);
+			designer = Helper.readString("Enter designer name > ");
+
+			for (User u : userList) {
+				if (u.getName().equals(designer)) {
+					if (appList.size() != 0) {
+						for (Appointment a : appList) {
+							if (a.getDesigner().equals(designer) && a.getDate().equals(date) && a.getTime() == t2) {
+								// Designer already have existing appointment
+								System.out.println("Designer already has an appointment on this date and time");
+
+							} else if (!(a.getDesigner().equals(designer))) {
+								// Cannot find designer in appointment list
+								check = true;
+								break;
+							} else if (a.getDesigner().equals(designer)) {
+
+								// Designer is free
+								check = true;
+								break;
+							}
+						}
+					} else {
+						check = true;
+						break;
+					}
+				}
+			}
+
+		}
+
+		// Create new Appointment object
+		if (check == true) {
+			a1 = new Appointment(name, time, t2, designer, address);
+		}
+
+		return a1;
+	}
 
 }
