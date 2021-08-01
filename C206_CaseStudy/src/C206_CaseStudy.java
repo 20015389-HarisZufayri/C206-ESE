@@ -4,15 +4,15 @@ public class C206_CaseStudy {
 
 	private static final int OPTION_QUIT = 6;
 	private static ArrayList<User> userList = new ArrayList<User>();
-//	private static ArrayList<Appointment> appList = new ArrayList<Appointment>();
-	
+	private static ArrayList<Appointment> appList = new ArrayList<Appointment>();
+
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-//		userList.add(new Customer("Shino", "9395-9352", "shino@gmail.com", "Customer"));
-//		userList.add(new Designer("Kuro", "9395-9312", "kuroRA@gmail.com", "Designer"));
-//
-//		appList.add(new Appointment("Shino", "2021-05-06", 1500, "Kuro", "River Valley 2510"));
-		
+		userList.add(new Customer("Shino", "9395-9352", "shino@gmail.com", "Customer"));
+		userList.add(new Designer("Kuro", "9395-9312", "kuroRA@gmail.com", "Designer"));
+
+		appList.add(new Appointment("Shino", "2021-05-06", 1500, "Kuro", "River Valley 2510"));
+
 		int option = 0;
 		while (option != OPTION_QUIT) {
 
@@ -22,7 +22,7 @@ public class C206_CaseStudy {
 			if (option == 1) {
 				// Manage User
 				C206_CaseStudy.manageUser();
-				
+
 				int Choice = Helper.readInt("Enter an option > ");
 
 				if (Choice == 1) {
@@ -39,7 +39,7 @@ public class C206_CaseStudy {
 				} else if (Choice > 4 || Choice < 0) {
 					System.out.println("Invalid option");
 					C206_CaseStudy.menu();
-					
+
 				}
 
 //			} else if (option == 2) {
@@ -67,10 +67,6 @@ public class C206_CaseStudy {
 //					Appointment a1 = C206_CaseStudy.inputDeleteApp();
 //					C206_CaseStudy.deleteApp(appList, a1);
 //
-//				} else if (cApp > 4 || cApp < 0) {
-//					System.out.println("Invalid option");
-//				}
-
 			} else if (option == 6) {
 				System.out.println("Logging off. . .");
 			} else {
@@ -90,7 +86,6 @@ public class C206_CaseStudy {
 		System.out.println("5. Manage Appointment");
 		System.out.println("6. Logout");
 		Helper.line(80, "-");
-
 	}
 
 	public static void setHeader(String header) {
@@ -109,38 +104,42 @@ public class C206_CaseStudy {
 		Helper.line(80, "-");
 	}
 
+	// ---<< MANAGE APPOINTMNET MENU >>---// Done by: Yolanda
+	public static void manageApp() {
+		C206_CaseStudy.setHeader("MANAGE APPOINTMENT");
+		System.out.println("1. Add New Appointment");
+		System.out.println("2. View All Appointment");
+		System.out.println("3. Delete Appointment");
+		System.out.println("4. Back");
+		Helper.line(80, "-");
+	}
+
 	// ---<< MANAGE USER: ADD USER >>---// Done by: Yolanda
 	public static User inputUser() {
 		User u1 = null;
 
-		while (u1 == null) {
+		String name = Helper.readStringRegEx("Enter name > ", "\\D{3,}");
+		String mobile = Helper.readStringRegEx("Enter mobile [0000-0000] > ", "[89]\\d{3}-\\d{4}");
+		String email = Helper.readStringRegEx("Enter email > ", "^\\S+@\\S+\\.\\S+$");
+		String role = Helper.readStringRegEx("Enter role > ", "\\b(Customer\\b|Client\\b|Designer)\\b");
 
-			String name = Helper.readStringRegEx("Enter name > ", "\\D{3,}");
-			String mobile = Helper.readStringRegEx("Enter mobile [0000-0000] > ", "[89]\\d{3}-\\d{4}");
-			String email = Helper.readStringRegEx("Enter email > ", "^\\S+@\\S+\\.\\S+$");
-			String role = Helper.readStringRegEx("Enter role > ", "\\b(Customer\\b|Client\\b|Designer)\\b");
-
-			if (role.equalsIgnoreCase("Customer") || role.equalsIgnoreCase("Client")) {
-				u1 = new Customer(name, mobile, email, role);
-			} else if (role.equalsIgnoreCase("Designer")) {
-				u1 = new Designer(name, mobile, email, role);
-			} else {
-				System.out.println("Invalid role entered.");
-			}
+		if (role.equalsIgnoreCase("Customer") || role.equalsIgnoreCase("Client")) {
+			u1 = new Customer(name, mobile, email, role);
+			
+		} else if (role.equalsIgnoreCase("Designer")) {
+			u1 = new Designer(name, mobile, email, role);
+	
 		}
-
 		return u1;
 
 	}
-
 	public static void addUser(ArrayList<User> userList, User u1) {
 
 		if (userList.add(u1)) {
 			System.out.println("User successfully added");
 		}
-
 	}
-
+	
 	// ---<< MANAGE USER: VIEW CUSTOMER >>---// Done by: Yolanda
 	public static String retrieveAllCustomer(ArrayList<User> userList) {
 		String output = "";
@@ -183,15 +182,19 @@ public class C206_CaseStudy {
 		System.out.println(output);
 	}
 
+	
 	// ---<< MANAGE USER: DELETE USER >>---// Done by: Yolanda
 	public static User inputDeleteUser() {
+		User u1 = null;
 		if (userList.size() != 0) {
 			String name = Helper.readString("Enter name > ");
 			for (User u : userList) {
 				if (u.getName().equals(name)) {
-					return u;
+					u1 = u;
 				}
 			}
+		} else {
+			System.out.println("There are no users");
 		}
 		return null;
 	}
@@ -202,17 +205,8 @@ public class C206_CaseStudy {
 		} else {
 			System.out.println("Invalid user");
 		}
+		
 	}
-
-	// ---<< MANAGE APPOINTMNET MENU >>---// Done by: Yolanda
-//	public static void manageApp() {
-//		C206_CaseStudy.setHeader("MANAGE APPOINTMENT");
-//		System.out.println("1. Add New Appointment");
-//		System.out.println("2. View All Appointment");
-//		System.out.println("3. Delete Appointment");
-//		System.out.println("4. Back");
-//		Helper.line(80, "-");
-//	}
 
 	// ---<< MANAGE APPOINTMENT: ADD APPOINTMENT >>---// Done by: Yolanda
 //	public static Appointment inputApp() {
