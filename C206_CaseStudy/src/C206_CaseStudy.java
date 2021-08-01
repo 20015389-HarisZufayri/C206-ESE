@@ -8,10 +8,10 @@ public class C206_CaseStudy {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		userList.add(new Customer("Shino", "9395-9352", "shino@gmail.com", "Customer"));
-		userList.add(new Designer("Kuro", "9395-9312", "kuroRA@gmail.com", "Designer"));
-
-		appList.add(new Appointment("Shino", "2021-05-06", 1500, "Kuro", "River Valley 2510"));
+//		userList.add(new Customer("Shino", "9395-9352", "shino@gmail.com", "Customer"));
+//		userList.add(new Designer("Kuro", "9395-9312", "kuroRA@gmail.com", "Designer"));
+//
+//		appList.add(new Appointment("Shino", "2021-05-06", 1500, "Kuro", "River Valley 2510"));
 
 		int option = 0;
 		while (option != OPTION_QUIT) {
@@ -217,10 +217,9 @@ public class C206_CaseStudy {
 		String name = Helper.readStringRegEx("Enter Name > ", "\\D{3,}");
 		if (checkUser(name)) {
 			String address = Helper.readStringRegEx("Enter address > ", "^(?!\\s*$).+");
-			
-			a1 = checkDesigner(name,address);
-		}
-		else {
+
+			a1 = checkDesigner(name, address);
+		} else {
 			System.out.println("User is not registered");
 			inputApp();
 		}
@@ -296,55 +295,60 @@ public class C206_CaseStudy {
 		return check;
 	}
 
-	// Valid Designer is registered and if they have existing appointment on same input date/time
+	// Valid Designer is registered and if they have existing appointment on same
+	// input date/time
 	public static Appointment checkDesigner(String name, String address) {
-		
-		
+
 		Appointment a1 = null;
-		
+
 		boolean check = false;
-		
+
 		String designer = "";
 		String date = "";
 		String time = "";
 		int t2 = 0;
-		
+
 		date = Helper.readStringRegEx("Enter date [yyyy-MM-dd] > ", "^\\d{4}-(0?[1-9]|1[012])-(0[1-9]|[12]\\d|3[01])");
 		time = Helper.readStringRegEx("Enter time [0000] > ", "([01]?[0-9]|2[0-3])[0-5][0-9]");
 		t2 = Integer.parseInt(time);
-		
+
 		while (check != true) {
 			viewAllDesigner(userList);
 			designer = Helper.readString("Enter designer name > ");
 
-			
-			
-			for (Appointment a : appList) {
-				
-				if (a.getDesigner().equals(designer) && a.getDate().equals(date) && a.getTime() == t2) {
-					
-					//Designer already have existing appointment
-					System.out.println("Designer already has an appointment on this date and time");
-					
-				} else if (!(a.getDesigner().equals(designer))) {
-					
-					//Cannot find designer
-					check = false;
-				} else if (a.getDesigner().equals(designer)) {
-					
-					//Designer is free
-					check = true;
-					break;
+			for (User u : userList) {
+				if (u.getName().equals(designer)) {
+					if (appList.size() != 0) {
+						for (Appointment a : appList) {
+							if (a.getDesigner().equals(designer) && a.getDate().equals(date) && a.getTime() == t2) {
+								// Designer already have existing appointment
+								System.out.println("Designer already has an appointment on this date and time");
+
+							} else if (!(a.getDesigner().equals(designer))) {
+								// Cannot find designer in appointment list
+								check = true;
+								break;
+							} else if (a.getDesigner().equals(designer)) {
+
+								// Designer is free
+								check = true;
+								break;
+							}
+						}
+					} else {
+						check = true;
+						break;
+					}
 				}
 			}
 
 		}
-		
-		//Create new Appointment object
+
+		// Create new Appointment object
 		if (check == true) {
-			a1 = new Appointment(name,time,t2,designer,address);
+			a1 = new Appointment(name, time, t2, designer, address);
 		}
-		
+
 		return a1;
 	}
 
