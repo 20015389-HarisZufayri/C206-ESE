@@ -33,4 +33,10 @@ public class Appointment {
 	public String getAddress() {
 		return address;
 	}
+	
+	
+	public String doString2() {
+		return String.format("%-10s %-10s %-10d %-10s %s\n", getCustName(), getDate(), getTime(),
+		getDesigner(), getAddress());
+	}
 }
