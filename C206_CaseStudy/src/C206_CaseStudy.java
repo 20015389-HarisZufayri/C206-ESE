@@ -5,14 +5,14 @@ public class C206_CaseStudy {
 	private static final int OPTION_QUIT = 6;
 	private static ArrayList<User> userList = new ArrayList<User>();
 	private static ArrayList<Appointment> appList = new ArrayList<Appointment>();
-
+	
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 //		userList.add(new Customer("Shino", "9395-9352", "shino@gmail.com", "Customer"));
 //		userList.add(new Designer("Kuro", "9395-9312", "kuroRA@gmail.com", "Designer"));
 //
 //		appList.add(new Appointment("Shino", "2021-05-06", 1500, "Kuro", "River Valley 2510"));
-
+		
 		int option = 0;
 		while (option != OPTION_QUIT) {
 
@@ -21,7 +21,26 @@ public class C206_CaseStudy {
 
 			if (option == 1) {
 				// Manage User
-				manageUser();
+				C206_CaseStudy.manageUser();
+				
+				int Choice = Helper.readInt("Enter an option > ");
+
+				if (Choice == 1) {
+					User u1 = inputUser();
+					C206_CaseStudy.addUser(userList, u1);
+				} else if (Choice == 2) {
+					C206_CaseStudy.viewAllCustomer(userList);
+					C206_CaseStudy.viewAllDesigner(userList);
+				} else if (Choice == 3) {
+					User u1 = C206_CaseStudy.inputDeleteUser();
+					C206_CaseStudy.deleteUser(userList, u1);
+				} else if (Choice == 4) {
+					C206_CaseStudy.menu();
+				} else if (Choice > 4 || Choice < 0) {
+					System.out.println("Invalid option");
+					C206_CaseStudy.menu();
+					
+				}
 
 //			} else if (option == 2) {
 				// Manage Package
@@ -32,9 +51,25 @@ public class C206_CaseStudy {
 //			} else if (option == 4) {
 //				// Manage Quotation
 //
-//			} else if (option == 5) {
+			} else if (option == 5) {
 				// Manage Appointment
-				manageApp();
+				C206_CaseStudy.manageApp();
+				
+				int cApp = Helper.readInt("Enter an option > ");
+
+				if (cApp == 1) {
+					Appointment a1 = inputApp();
+					C206_CaseStudy.addApp(appList, a1);
+				} else if (cApp == 2) {
+					C206_CaseStudy.viewAllAppointment(appList);
+
+				} else if (cApp == 3) {
+					Appointment a1 = C206_CaseStudy.inputDeleteApp();
+					C206_CaseStudy.deleteApp(appList, a1);
+
+				} else if (cApp > 4 || cApp < 0) {
+					System.out.println("Invalid option");
+				}
 
 			} else if (option == 6) {
 				System.out.println("Logging off. . .");
@@ -72,23 +107,6 @@ public class C206_CaseStudy {
 		System.out.println("3. Delete User");
 		System.out.println("4. Back");
 		Helper.line(80, "-");
-
-		int mUser = Helper.readInt("Enter an option > ");
-
-		if (mUser == 1) {
-			User u1 = inputUser();
-			C206_CaseStudy.addUser(userList, u1);
-		} else if (mUser == 2) {
-			C206_CaseStudy.viewAllCustomer(userList);
-			C206_CaseStudy.viewAllDesigner(userList);
-		} else if (mUser == 3) {
-			User u1 = C206_CaseStudy.inputDeleteUser();
-			C206_CaseStudy.deleteUser(userList, u1);
-		} else if (mUser == 4) {
-			C206_CaseStudy.menu();
-		} else if (mUser > 4 || mUser < 0) {
-			System.out.println("Invalid option");
-		}
 	}
 
 	// ---<< MANAGE USER: ADD USER >>---// Done by: Yolanda
@@ -194,22 +212,6 @@ public class C206_CaseStudy {
 		System.out.println("3. Delete Appointment");
 		System.out.println("4. Back");
 		Helper.line(80, "-");
-
-		int mUser = Helper.readInt("Enter an option > ");
-
-		if (mUser == 1) {
-			Appointment a1 = inputApp();
-			C206_CaseStudy.addApp(appList, a1);
-		} else if (mUser == 2) {
-			C206_CaseStudy.viewAllAppointment(appList);
-
-		} else if (mUser == 3) {
-			Appointment a1 = C206_CaseStudy.inputDeleteApp();
-			C206_CaseStudy.deleteApp(appList, a1);
-
-		} else if (mUser > 4 || mUser < 0) {
-			System.out.println("Invalid option");
-		}
 	}
 
 	// ---<< MANAGE APPOINTMENT: ADD APPOINTMENT >>---// Done by: Yolanda
