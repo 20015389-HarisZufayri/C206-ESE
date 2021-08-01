@@ -29,8 +29,10 @@ public class C206_CaseStudy {
 					User u1 = inputUser();
 					C206_CaseStudy.addUser(userList, u1);
 				} else if (Choice == 2) {
+					
 					C206_CaseStudy.viewAllCustomer(userList);
 					C206_CaseStudy.viewAllDesigner(userList);
+					
 				} else if (Choice == 3) {
 					User u1 = C206_CaseStudy.inputDeleteUser();
 					C206_CaseStudy.deleteUser(userList, u1);
