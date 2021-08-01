@@ -121,63 +121,63 @@ public class C206_CaseStudyTest {
 		
 	}
 	
-	@Test
-	public void addAppTest() {
-		
-		assertNotNull(appList);
-
-		C206_CaseStudy.addApp(appList, a1);
-		assertEquals(1, appList.size());
-		assertSame(a1, appList.get(0));
-
-		C206_CaseStudy.addApp(appList, a2);
-		assertEquals(2, appList.size());
-		assertSame(a2, appList.get(1));
-	}
-	
-	
-	@Test
-	public void retrieveAllAppTest() {
-		assertNotNull(appList);
-		
-		C206_CaseStudy.addUser(userList, c1);
-		C206_CaseStudy.addUser(userList, c2);
-		
-		String allApp= C206_CaseStudy.retrieveAllAppointment(appList);
-		String testOutput = "";
-		assertEquals(testOutput, allApp);
-		
-		C206_CaseStudy.addApp(appList, a1);
-		C206_CaseStudy.addApp(appList, a2);
-		assertEquals(2, appList.size());
-		
-		allApp= C206_CaseStudy.retrieveAllAppointment(appList);
-		testOutput = String.format("%-10s %-10s %-10d %-10s %s\n","Mizuki","2021-05-02",1500,"Kuro","WhateverThisPlaceIs");
-		testOutput += String.format("%-10s %-10s %-10d %-10s %s\n","Shino","2021-05-06",1500,"Kuro","Area 69");
-	
-		assertEquals(testOutput, allApp);
-		
-	}
-	
-	@Test
-	public void deleteAppTest() {
-		assertNotNull(userList);
-		
-		C206_CaseStudy.addUser(userList, c1);
-		C206_CaseStudy.addUser(userList, c2);
-		
-		C206_CaseStudy.addApp(appList, a1);
-		C206_CaseStudy.addApp(appList, a2);
-		
-		C206_CaseStudy.deleteApp(appList, a1);
-		assertEquals(1,appList.size());
-		
-		C206_CaseStudy.deleteApp(appList, a2);
-		assertEquals(0,appList.size());
-		
-		boolean test = (appList.remove(a1));
-		assertFalse(test);
-		
-	}
+//	@Test
+//	public void addAppTest() {
+//		
+//		assertNotNull(appList);
+//
+//		C206_CaseStudy.addApp(appList, a1);
+//		assertEquals(1, appList.size());
+//		assertSame(a1, appList.get(0));
+//
+//		C206_CaseStudy.addApp(appList, a2);
+//		assertEquals(2, appList.size());
+//		assertSame(a2, appList.get(1));
+//	}
+//	
+//	
+//	@Test
+//	public void retrieveAllAppTest() {
+//		assertNotNull(appList);
+//		
+//		C206_CaseStudy.addUser(userList, c1);
+//		C206_CaseStudy.addUser(userList, c2);
+//		
+//		String allApp= C206_CaseStudy.retrieveAllAppointment(appList);
+//		String testOutput = "";
+//		assertEquals(testOutput, allApp);
+//		
+//		C206_CaseStudy.addApp(appList, a1);
+//		C206_CaseStudy.addApp(appList, a2);
+//		assertEquals(2, appList.size());
+//		
+//		allApp= C206_CaseStudy.retrieveAllAppointment(appList);
+//		testOutput = String.format("%-10s %-10s %-10d %-10s %s\n","Mizuki","2021-05-02",1500,"Kuro","WhateverThisPlaceIs");
+//		testOutput += String.format("%-10s %-10s %-10d %-10s %s\n","Shino","2021-05-06",1500,"Kuro","Area 69");
+//	
+//		assertEquals(testOutput, allApp);
+//		
+//	}
+//	
+//	@Test
+//	public void deleteAppTest() {
+//		assertNotNull(userList);
+//		
+//		C206_CaseStudy.addUser(userList, c1);
+//		C206_CaseStudy.addUser(userList, c2);
+//		
+//		C206_CaseStudy.addApp(appList, a1);
+//		C206_CaseStudy.addApp(appList, a2);
+//		
+//		C206_CaseStudy.deleteApp(appList, a1);
+//		assertEquals(1,appList.size());
+//		
+//		C206_CaseStudy.deleteApp(appList, a2);
+//		assertEquals(0,appList.size());
+//		
+//		boolean test = (appList.remove(a1));
+//		assertFalse(test);
+//		
+//	}
 
 }
