@@ -118,10 +118,10 @@ public class C206_CaseStudy {
 	public static User inputUser() {
 		User u1 = null;
 
-		String name = Helper.readStringRegEx("Enter name > ", "\\D{3,}");
-		String mobile = Helper.readStringRegEx("Enter mobile [0000-0000] > ", "[89]\\d{3}-\\d{4}");
-		String email = Helper.readStringRegEx("Enter email > ", "^\\S+@\\S+\\.\\S+$");
-		String role = Helper.readStringRegEx("Enter role > ", "\\b(Customer\\b|Client\\b|Designer)\\b");
+		String name = Helper.readString("Enter name > ");
+		String mobile = Helper.readString("Enter mobile [0000-0000] > ");
+		String email = Helper.readString("Enter email > ");
+		String role = Helper.readString("Enter role > ");
 
 		if (role.equalsIgnoreCase("Customer") || role.equalsIgnoreCase("Client")) {
 			u1 = new Customer(name, mobile, email, role);
@@ -196,7 +196,7 @@ public class C206_CaseStudy {
 		} else {
 			System.out.println("There are no users");
 		}
-		return null;
+		return u1;
 	}
 
 	public static void deleteUser(ArrayList<User> userList, User u1) {
