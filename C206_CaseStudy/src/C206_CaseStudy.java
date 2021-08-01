@@ -21,7 +21,7 @@ public class C206_CaseStudy {
 
 			if (option == 1) {
 				// Manage User
-				C206_CaseStudy.manageUser();
+				manageUser();
 
 			} else if (option == 2) {
 				// Manage Package
@@ -34,7 +34,7 @@ public class C206_CaseStudy {
 
 			} else if (option == 5) {
 				// Manage Appointment
-				C206_CaseStudy.manageApp();
+				manageApp();
 
 			} else if (option == 6) {
 				System.out.println("Logging off. . .");
@@ -84,6 +84,8 @@ public class C206_CaseStudy {
 		} else if (mUser == 3) {
 			User u1 = C206_CaseStudy.inputDeleteUser();
 			C206_CaseStudy.deleteUser(userList, u1);
+		} else if (mUser == 4) {
+			C206_CaseStudy.menu();
 		} else if (mUser > 4 || mUser < 0) {
 			System.out.println("Invalid option");
 		}
