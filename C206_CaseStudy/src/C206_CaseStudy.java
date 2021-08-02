@@ -112,7 +112,14 @@ public class C206_CaseStudy {
 		} else if (cApp == 3) {
 			Appointment a1 = C206_CaseStudy.inputDeleteApp();
 			C206_CaseStudy.deleteApp(appList, a1);
+		} else if (cApp == 4) {
+			C206_CaseStudy.menu();
+		} else if (cApp > 4 || cApp < 0) {
+			System.out.println("Invalid option");
+			C206_CaseStudy.menu();
+
 		}
+		
 	}
 
 	// ---<< MANAGE USER: ADD USER >>---// Done by: Yolanda
