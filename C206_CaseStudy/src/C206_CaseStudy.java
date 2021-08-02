@@ -119,7 +119,7 @@ public class C206_CaseStudy {
 			C206_CaseStudy.menu();
 
 		}
-		
+
 	}
 
 	// ---<< MANAGE USER: ADD USER >>---// Done by: Yolanda
@@ -235,8 +235,18 @@ public class C206_CaseStudy {
 
 		String name = Helper.readString("Enter Name > ");
 		if (checkUser(name)) {
-			a1 = checkDesigner(name);
-			return a1;
+			for (Appointment a : appList) {
+				if (a.getCustName().equals(name)) {
+
+					System.out.println("User have existing appointment");
+					break;
+				} else {
+
+					a1 = checkDesigner(name);
+					return a1;
+				}
+			}
+
 		} else {
 			System.out.println("User is not registered");
 		}
@@ -277,13 +287,9 @@ public class C206_CaseStudy {
 				for (Appointment a : appList) {
 					if (a.getCustName().equals(name)) {
 						return a;
-
-					} else {
-						System.out.println("Unable to delete appointment");
 					}
 				}
-			}
-			else {
+			} else {
 				System.out.println("User is not registered");
 			}
 		} else {
@@ -337,6 +343,7 @@ public class C206_CaseStudy {
 
 		time = Helper.readString("Enter time [0000] > ");
 		boolean checkTime = validInput("Time", time);
+		
 		if (checkAddress && checkDate && checkTime) {
 			t2 = Integer.parseInt(time);
 
@@ -352,6 +359,12 @@ public class C206_CaseStudy {
 									// Designer already have existing appointment = Cannot add
 									System.out.println("Designer already has an appointment on this date and time");
 
+
+									date = Helper.readString("Enter date [yyyy-MM-dd] > ");
+									
+									time = Helper.readString("Enter time [0000] > ");
+							
+									
 								} else if (!(a.getDesigner().equals(designer))) {
 									// Cannot find designer in appointment list = Can add
 									check = true;
@@ -370,7 +383,6 @@ public class C206_CaseStudy {
 						}
 					}
 				}
-
 			}
 			// Create new Appointment object
 			if (check == true) {
@@ -381,7 +393,7 @@ public class C206_CaseStudy {
 		}
 		return a1;
 	}
-
+	
 	public static boolean validInput(String type, String input) {
 		boolean check = false;
 		if (type.equals("Name")) {
