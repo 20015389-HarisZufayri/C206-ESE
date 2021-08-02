@@ -1,8 +1,10 @@
 import java.util.ArrayList;
+import java.util.regex.Pattern;
 
 public class C206_CaseStudy {
 
 	private static final int OPTION_QUIT = 6;
+
 	private static ArrayList<User> userList = new ArrayList<User>();
 	private static ArrayList<Appointment> appList = new ArrayList<Appointment>();
 
@@ -23,8 +25,6 @@ public class C206_CaseStudy {
 				// Manage User
 				C206_CaseStudy.manageUser();
 
-				
-
 			} else if (option == 2) {
 				// Manage Package
 
@@ -37,7 +37,7 @@ public class C206_CaseStudy {
 			} else if (option == 5) {
 				// Manage Appointment
 				C206_CaseStudy.manageApp();
-				
+
 			} else if (option == 6) {
 				System.out.println("Logging off. . .");
 			} else {
@@ -71,7 +71,7 @@ public class C206_CaseStudy {
 		System.out.println("3. Delete User");
 		System.out.println("4. Back");
 		Helper.line(80, "-");
-		
+
 		int Choice = Helper.readInt("Enter an option > ");
 
 		if (Choice == 1) {
@@ -100,7 +100,7 @@ public class C206_CaseStudy {
 		System.out.println("3. Delete Appointment");
 		System.out.println("4. Back");
 		Helper.line(80, "-");
-		
+
 		int cApp = Helper.readInt("Enter an option > ");
 
 		if (cApp == 1) {
@@ -120,12 +120,19 @@ public class C206_CaseStudy {
 		User u1 = null;
 
 		String name = Helper.readString("Enter name > ");
+		boolean nameCheck = validInput("Name", name);
+
 		String mobile = Helper.readString("Enter mobile [0000-0000] > ");
+		boolean mobileCheck = validInput("Mobile", mobile);
+
 		String email = Helper.readString("Enter email > ");
-		String role = Helper.readString("Enter role > ");
-		
-		if (!(name.equals("") && !(mobile.equals("")) && !(email.equals("")) && !(role.equals("")))) {
-			if (role.equalsIgnoreCase("Customer") || role.equalsIgnoreCase("Client")) {
+		boolean emailCheck = validInput("Email", email);
+
+		String role = Helper.readString("Enter role [Customer|Designer] > ");
+		boolean roleCheck = validInput("Role", role);
+
+		if (nameCheck && mobileCheck && emailCheck && roleCheck) {
+			if (role.equals("Customer") || role.equals("Client")) {
 				u1 = new Customer(name, mobile, email, role);
 
 			} else if (role.equalsIgnoreCase("Designer")) {
@@ -134,6 +141,7 @@ public class C206_CaseStudy {
 			}
 		} else {
 			System.out.println("Invalid input");
+
 		}
 		return u1;
 
@@ -196,7 +204,7 @@ public class C206_CaseStudy {
 			for (User u : userList) {
 				if (u.getName().equals(name)) {
 					u1 = u;
-					
+
 				}
 			}
 		} else {
@@ -208,8 +216,7 @@ public class C206_CaseStudy {
 	public static void deleteUser(ArrayList<User> userList, User u1) {
 		if (u1 != null && userList.remove(u1)) {
 			System.out.println("User successfully deleted");
-		}
-		else {
+		} else {
 			System.out.println("Invalid user for deletion");
 		}
 
@@ -263,11 +270,14 @@ public class C206_CaseStudy {
 				for (Appointment a : appList) {
 					if (a.getCustName().equals(name)) {
 						return a;
-						
+
 					} else {
 						System.out.println("Unable to delete appointment");
 					}
 				}
+			}
+			else {
+				System.out.println("User is not registered");
 			}
 		} else {
 			System.out.println("There are no appointments");
@@ -278,7 +288,7 @@ public class C206_CaseStudy {
 	public static void deleteApp(ArrayList<Appointment> appList, Appointment a1) {
 		if (a1 != null && appList.remove(a1)) {
 			System.out.println("Appointment successfully deleted");
-		} 
+		}
 	}
 
 	// Validate Customer is in system
@@ -305,58 +315,90 @@ public class C206_CaseStudy {
 		Appointment a1 = null;
 
 		boolean check = false;
-		
 
-		
 		String address = "";
 		String designer = "";
 		String date = "";
 		String time = "";
 		int t2 = 0;
-		
+
 		address = Helper.readString("Enter address > ");
+		boolean checkAddress = validInput("Address", address);
+
 		date = Helper.readString("Enter date [yyyy-MM-dd] > ");
+		boolean checkDate = validInput("Date", date);
+
 		time = Helper.readString("Enter time [0000] > ");
-		t2 = Integer.parseInt(time);
+		boolean checkTime = validInput("Time", time);
+		if (checkAddress && checkDate && checkTime) {
+			t2 = Integer.parseInt(time);
 
-		while (check != true) {
-			viewAllDesigner(userList);
-			designer = Helper.readString("Enter designer name > ");
+			while (check != true) {
+				viewAllDesigner(userList);
+				designer = Helper.readString("Enter designer name > ");
 
-			for (User u : userList) {
-				if (u.getName().equals(designer)) {
-					if (appList.size() != 0) {
-						for (Appointment a : appList) {
-							if (a.getDesigner().equals(designer) && a.getDate().equals(date) && a.getTime() == t2) {
-								// Designer already have existing appointment
-								System.out.println("Designer already has an appointment on this date and time");
+				for (User u : userList) {
+					if (u.getName().equals(designer)) {
+						if (appList.size() != 0) {
+							for (Appointment a : appList) {
+								if (a.getDesigner().equals(designer) && a.getDate().equals(date) && a.getTime() == t2) {
+									// Designer already have existing appointment = Cannot add
+									System.out.println("Designer already has an appointment on this date and time");
 
-							} else if (!(a.getDesigner().equals(designer))) {
-								// Cannot find designer in appointment list
-								check = true;
-								break;
-							} else if (a.getDesigner().equals(designer)) {
+								} else if (!(a.getDesigner().equals(designer))) {
+									// Cannot find designer in appointment list = Can add
+									check = true;
+									break;
+								} else if (a.getDesigner().equals(designer)) {
 
-								// Designer is free
-								check = true;
-								break;
+									// Designer is free = Can add
+									check = true;
+									break;
+								}
 							}
+						} else {
+							// If there are nothing in array = Can add
+							check = true;
+							break;
 						}
-					} else {
-						check = true;
-						break;
 					}
 				}
+
 			}
-
+			// Create new Appointment object
+			if (check == true) {
+				a1 = new Appointment(name, date, t2, designer, address);
+			}
+		} else {
+			System.out.println("Invalid input");
 		}
-
-		// Create new Appointment object
-		if (check == true) {
-			a1 = new Appointment(name, date, t2, designer, address);
-		}
-
 		return a1;
 	}
 
+	public static boolean validInput(String type, String input) {
+		boolean check = false;
+		if (type.equals("Name")) {
+			String patternName = "\\D{3,}";
+			check = Pattern.matches(patternName, input);
+		} else if (type.equals("Mobile")) {
+			String patternMobile = "[89]\\d{3}-\\d{4}";
+			check = Pattern.matches(patternMobile, input);
+		} else if (type.equals("Email")) {
+			String patternEmail = "^\\S+@\\S+\\.\\S+$";
+			check = Pattern.matches(patternEmail, input);
+		} else if (type.equals("Role")) {
+			String patternRole = "\\b(Customer\\b|Client\\b|Designer)\\b";
+			check = Pattern.matches(patternRole, input);
+		} else if (type.equals("Address")) {
+			String patternAddress = "\\D{1,}";
+			check = Pattern.matches(patternAddress, input);
+		} else if (type.equals("Date")) {
+			String patternDate = "^\\d{4}\\-(0?[1-9]|1[012])\\-(0?[1-9]|[12][0-9]|3[01])$";
+			check = Pattern.matches(patternDate, input);
+		} else if (type.equals("Time")) {
+			String patternTime = "^([01][0-9]|2[0-3])([0-5][0-9])$";
+			check = Pattern.matches(patternTime, input);
+		}
+		return check;
+	}
 }
