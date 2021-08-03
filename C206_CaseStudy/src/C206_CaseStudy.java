@@ -12,6 +12,8 @@ public class C206_CaseStudy {
 		// TODO Auto-generated method stub
 		userList.add(new Customer("Shino", "9395-9352", "shino@gmail.com", "Customer"));
 		userList.add(new Designer("Kuro", "9395-9312", "kuroRA@gmail.com", "Designer"));
+		
+		userList.add(new Customer("Yolanda", "9395-123", "yolanda@gmail.com", "Customer"));
 
 		appList.add(new Appointment("Shino", "2021-05-06", 1500, "Kuro", "River Valley 2510"));
 
@@ -383,6 +385,7 @@ public class C206_CaseStudy {
 						}
 					}
 				}
+				System.out.println("Invalid Designer");
 			}
 			// Create new Appointment object
 			if (check == true) {
