@@ -18,6 +18,8 @@ public class C206_CaseStudyTest {
 	
 	private ArrayList<User> userList;
 	private ArrayList<Appointment> appList;
+	
+	private 
 	 
 	public C206_CaseStudyTest() {
 		super();
