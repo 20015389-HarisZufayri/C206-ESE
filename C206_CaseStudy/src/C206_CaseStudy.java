@@ -563,7 +563,7 @@ public class C206_CaseStudy {
 			String patternQid = "\\d+";
 			check = Pattern.matches(patternQid, input);
 		} else if (type.equals("Total Quotation Outcome")) {
-			String patternTqo = "^[1-9](.)?[0-9]?[0-9]";
+			String patternTqo = "^[\\d]+[\\.][\\d]{2}$";
 			check = Pattern.matches(patternTqo, input);
 		} else if (type.equals("Reno Cat")) {
 			String patternRec = "\\b(Bedroom\\b|Kitchen\\b|Living Room)\\b";
