@@ -9,6 +9,7 @@ public class C206_CaseStudy {
 	private static ArrayList<User> userList = new ArrayList<User>();
 	private static ArrayList<Appointment> appList = new ArrayList<Appointment>();
 	private static ArrayList<Quote> quoteList = new ArrayList<Quote>();
+	private static ArrayList<Request> requestList = new ArrayList<Request>();
 
 	private static Date CURRENT_DATE = new Date();
 	private static DateFormat DATE_FORMAT = new SimpleDateFormat("dd-mm-yyyy");
@@ -22,8 +23,8 @@ public class C206_CaseStudy {
 		userList.add(new Customer("Yolanda", "9395-123", "yolanda@gmail.com", "Customer"));
 
 		appList.add(new Appointment("Shino", "06-05-2021", 1500, "Kuro", "River Valley 2510"));
-		
-		quoteList.add(new Quote("1", "1","Kitchen","Tiles - $3000", "Kuro", "12-08-2021", "3000.00"));
+
+		quoteList.add(new Quote("1", "1", "Kitchen", "Tiles - $3000", "Kuro", "12-08-2021", "3000.00"));
 
 		int option = 0;
 		while (option != OPTION_QUIT) {
@@ -40,6 +41,7 @@ public class C206_CaseStudy {
 
 			} else if (option == 3) {
 				// Manage Request for quotation
+				C206_CaseStudy.manageRequest();
 
 			} else if (option == 4) {
 				// Manage Quotation
@@ -57,7 +59,6 @@ public class C206_CaseStudy {
 		}
 	}
 
-	
 	public static void menu() {
 		C206_CaseStudy.setHeader("RENOVATION ACE");
 		System.out.println("1. Manage User");
@@ -74,8 +75,184 @@ public class C206_CaseStudy {
 		System.out.println(header);
 		Helper.line(80, "-");
 	}
-	
-	//Manage quote menu by RX
+
+	// Manage Request Menu by Haris
+	private static void manageRequest() {
+		// TODO Auto-generated method stub
+		C206_CaseStudy.setHeader("MANAGE REQUEST");
+		System.out.println("1. Add New Request");
+		System.out.println("2. View All Request");
+		System.out.println("3. Delete Request");
+		System.out.println("4. Back");
+		Helper.line(80, "-");
+
+		int Choice = Helper.readInt("Enter an option > ");
+
+		if (Choice == 1) {
+			Request r1 = inputRequest();
+			C206_CaseStudy.addRequest(requestList, r1);
+		} else if (Choice == 2) {
+			C206_CaseStudy.viewAllRequest(requestList);
+		} else if (Choice == 3) {
+			Request r1 = C206_CaseStudy.inputDeleteRequest();
+			C206_CaseStudy.deleteRequest(requestList, r1);
+		} else if (Choice == 4) {
+			C206_CaseStudy.menu();
+		} else if (Choice > 4 || Choice < 0) {
+			System.out.println("Invalid option");
+			C206_CaseStudy.menu();
+
+		}
+
+	}
+
+	// Manage Delete Requests by Haris
+	private static void deleteRequest(ArrayList<Request> requestList, Request r1) {
+		// TODO Auto-generated method stub
+		if (r1 != null && requestList.remove(r1)) {
+			System.out.println("Request successfully deleted");
+		} else {
+			System.out.println("Invalid request for deletion");
+		}
+
+	}
+
+	// Manage Input Delete Request Requests by Haris
+	private static Request inputDeleteRequest() {
+		// TODO Auto-generated method stub
+		Request r1 = null;
+		if (requestList.size() != 0) {
+			int requestid = Helper.readInt("Enter Request ID > ");
+			for (Request r : requestList) {
+				if (r.getRequestID() == (requestid)) {
+					r1 = r;
+
+				}
+			}
+		} else {
+			System.out.println("There are no quotes");
+		}
+		return r1;
+
+	}
+
+	// Manage View All Requests by Haris
+	private static void viewAllRequest(ArrayList<Request> requestList) {
+		// TODO Auto-generated method stub
+		C206_CaseStudy.setHeader("REQUEST LIST");
+		String output = String.format(
+				"%-10s %-10s %-10s %-10s %-10s %-10s %-10s %-10s %-10s %-10s %-10s %-10s %-10s %-10s\n", "REQUEST ID",
+				"PROPERTY TYPE", "AREA SIZE", "REQUEST NAME", "CONTACT NUMBER", "EMAIL", "BUDGET",
+				"TARGET COMPLETION DATE", "RENOVATION TYPE", "NUMBER OF ROOMS", "NUMBER OF TOILETS", "RENOVATION STYLE",
+				"REQUEST DATE", "STATUS");
+		output += retrieveAllRequest(requestList);
+		System.out.println(output);
+
+	}
+
+// Manage Retrieve Requests by Haris
+	private static String retrieveAllRequest(ArrayList<Request> requestList) {
+		// TODO Auto-generated method stub
+		String output = "";
+
+		for (Request r : requestList) {
+			output += String.format("%s", r.doStringRequest());
+		}
+		return output;
+
+	}
+
+	// Add Request into requestList by Haris
+	private static void addRequest(ArrayList<Request> requestList, Request r1) {
+		// TODO Auto-generated method stub
+
+		if (r1 != null && requestList.add(r1)) {
+			System.out.println("Request successfully added");
+		}
+
+	}
+
+	// Manage Input Request by Haris
+	private static Request inputRequest() {
+		// TODO Auto-generated method stub
+		Request r1 = null;
+
+		int requestid = Helper.readInt("Enter Request ID > ");
+		boolean requestidCheck = validInput("Request ID", String.valueOf(requestid));
+		System.out.println(requestidCheck);
+
+		String propertyType = Helper.readString("Enter Property Type [HDB|Private|Landed] > ");
+		boolean propertyTypeCheck = validInput("Property Type", propertyType);
+		System.out.println(propertyTypeCheck);
+
+		int areaSize = Helper.readInt("Enter Area Size > ");
+		boolean areaSizeCheck = validInput("Area Size", String.valueOf(areaSize));
+		System.out.println(areaSizeCheck);
+
+		String requestName = Helper.readString("Enter Request Name > ");
+		boolean requestNameCheck = validInput("Name", requestName);
+		System.out.println(requestNameCheck);
+
+		int CNumber = Helper.readInt("Enter Contact Number > ");
+		boolean CNumberCheck = validInput("Mobile", String.valueOf(CNumber));
+		System.out.println(CNumberCheck);
+
+		String email = Helper.readString("Enter Email > ");
+		boolean emailCheck = validInput("Email", email);
+		System.out.println(emailCheck);
+
+		int budget = Helper.readInt("Enter Total Budget Amount > ");
+		boolean budgetCheck = validInput("Total Quotation Amount", String.valueOf(budget));
+		System.out.println(budgetCheck);
+
+		String tgtCompletionDate = Helper.readString("Enter Completion Date DD-MM-YYYY > ");
+		boolean tgtCompletionDateCheck = validInput("Date", tgtCompletionDate);
+		System.out.println(tgtCompletionDateCheck);
+
+		String renovationType = Helper.readString("Enter Renovation Type [Whole House|Room|Kitchen|Toilet] > ");
+		boolean renovationTypeCheck = validInput("Renovation Type", renovationType);
+		System.out.println(renovationTypeCheck);
+
+		int noOfRooms = Helper.readInt("Enter number of rooms: ");
+		boolean noOfRoomsCheck = validInput("Number of Items", String.valueOf(noOfRooms));
+		System.out.println(noOfRoomsCheck);
+
+		int noOfToilets = Helper.readInt("Enter number of toilets: ");
+		boolean noOfToiletsCheck = validInput("Number of Items", String.valueOf(noOfToilets));
+		System.out.println(noOfToiletsCheck);
+
+		String renoStyle = Helper.readString("Enter renovation style: ");
+		boolean renoStyleCheck = validInput("Name", renoStyle);
+		System.out.println(renoStyleCheck);
+
+		String status = Helper.readString("Urgent ? :");
+		boolean statusCheck = validInput("Status", status);
+		System.out.println(statusCheck);
+
+		String requestDate = Helper.readString("Enter Request Date: ");
+		boolean requestDateCheck = validInput("Date", requestDate);
+		System.out.println(requestDateCheck);
+
+		// with renoStyle
+		if (requestidCheck && propertyTypeCheck && areaSizeCheck && requestNameCheck && CNumberCheck && emailCheck
+				&& budgetCheck && tgtCompletionDateCheck && renovationTypeCheck && noOfRoomsCheck && noOfToiletsCheck
+				&& renoStyleCheck && statusCheck && requestDateCheck) {
+			r1 = new Request(requestid, propertyType, areaSize, requestName, CNumber, email, budget, tgtCompletionDate,
+					renovationType, noOfRooms, noOfToilets, renoStyle, status, requestDate);
+			// without renoStyle
+		} else if (requestidCheck && propertyTypeCheck && areaSizeCheck && requestNameCheck && CNumberCheck
+				&& emailCheck && budgetCheck && tgtCompletionDateCheck && renovationTypeCheck && noOfRoomsCheck
+				&& noOfToiletsCheck && statusCheck && requestDateCheck) {
+			r1 = new Request(requestid, propertyType, areaSize, requestName, CNumber, email, budget, tgtCompletionDate,
+					renovationType, noOfRooms, noOfToilets, status, requestDate);
+		} else {
+			System.out.println("Invalid Input");
+		}
+		return r1;
+
+	}
+
+	// Manage quote menu by RX
 	public static void manageQuote() {
 		C206_CaseStudy.setHeader("MANAGE QUOTE");
 		System.out.println("1. Add New Quote");
@@ -85,14 +262,14 @@ public class C206_CaseStudy {
 		Helper.line(80, "-");
 
 		int Choice = Helper.readInt("Enter an option > ");
-		
+
 		if (Choice == 1) {
 			Quote q1 = inputQuote();
 			C206_CaseStudy.addQuote(quoteList, q1);
 		} else if (Choice == 2) {
 			C206_CaseStudy.viewAllQuote(quoteList);
 		} else if (Choice == 3) {
-			Quote q1 = C206_CaseStudy. inputDeleteQuote();
+			Quote q1 = C206_CaseStudy.inputDeleteQuote();
 			C206_CaseStudy.deleteQuote(quoteList, q1);
 		} else if (Choice == 4) {
 			C206_CaseStudy.menu();
@@ -102,11 +279,11 @@ public class C206_CaseStudy {
 
 		}
 	}
-	
+
 	/**
 	 * @return
 	 */
-	//Manage quote delete by RX
+	// Manage quote delete by RX
 	public static Quote inputDeleteQuote() {
 		Quote q1 = null;
 		if (quoteList.size() != 0) {
@@ -122,62 +299,59 @@ public class C206_CaseStudy {
 		}
 		return q1;
 	}
-	
-	
+
 	public static void deleteQuote(ArrayList<Quote> quoteList, Quote q1) {
-			if (q1 != null && quoteList.remove(q1)) {
-				System.out.println("User successfully deleted");
-			} else {
-				System.out.println("Invalid user for deletion");
-			}
+		if (q1 != null && quoteList.remove(q1)) {
+			System.out.println("User successfully deleted");
+		} else {
+			System.out.println("Invalid user for deletion");
+		}
 
 	}
 
-
-	//Manage quote add by RX
+	// Manage quote add by RX
 	public static Quote inputQuote() {
-		
+
 		Quote q1 = null;
-		
+
 		String requestid = Helper.readString("Enter Request ID > ");
 		boolean requestidCheck = validInput("Request ID", requestid);
-		
+
 		String quotationid = Helper.readString("Enter Quotation ID > ");
 		boolean quotationidCheck = validInput("Quotation ID", quotationid);
-		
+
 		String renoC = Helper.readString("Enter Reno Category [Bedroom|Kitchen|Living Room] > ");
 		boolean renoCheck = validInput("Reno Cat", renoC);
-		
+
 		String renoD = Helper.readString("Enter Reno Description > ");
 		boolean renoDCheck = validInput("Reno Des", renoD);
-		
+
 		String desName = Helper.readString("Enter Name > ");
 		boolean desNameCheck = validInput("Name", desName);
-		
+
 		String earDate = Helper.readString("Enter Date [yyyy-MM-dd] > ");
 		boolean earDateCheck = validInput("Date", earDate);
-		
+
 		String tAmount = Helper.readString("Enter Total Quotation Amount [0000.00] > ");
 		boolean tAmountCheck = validInput("Total Quotation Amount", tAmount);
-		
-		if (requestidCheck && quotationidCheck && renoCheck && renoDCheck
-				&& desNameCheck && earDateCheck && tAmountCheck ) {
-			q1 = new Quote(requestid, quotationid, renoC, renoD,
-				desName , earDate, tAmount);
+
+		if (requestidCheck && quotationidCheck && renoCheck && renoDCheck && desNameCheck && earDateCheck
+				&& tAmountCheck) {
+			q1 = new Quote(requestid, quotationid, renoC, renoD, desName, earDate, tAmount);
 		} else {
-				System.out.println("Invalid Input");
-			}
-		return q1;
+			System.out.println("Invalid Input");
 		}
-	
+		return q1;
+	}
+
 	public static void addQuote(ArrayList<Quote> quoteList, Quote q1) {
 
 		if (q1 != null && quoteList.add(q1)) {
 			System.out.println("Quote successfully added");
 		}
 	}
-	
-	//Manage quote view by RX
+
+	// Manage quote view by RX
 	public static String retrieveAllQuote(ArrayList<Quote> quoteList) {
 		String output = "";
 
@@ -186,15 +360,14 @@ public class C206_CaseStudy {
 		}
 		return output;
 	}
-	
+
 	public static void viewAllQuote(ArrayList<Quote> quoteList) {
 		C206_CaseStudy.setHeader("QUOTATION LIST");
-		String output = String.format("%-15s %-15s %-15s %-15s %-15s %-15s %s\n", 
-				"REQUEST ID", "QUOTATION ID", "CATEGORY", "DESCRIPTION", "DESIGNER", "EARLIEST DATE", "TOTAL AMOUNT");
+		String output = String.format("%-15s %-15s %-15s %-15s %-15s %-15s %s\n", "REQUEST ID", "QUOTATION ID",
+				"CATEGORY", "DESCRIPTION", "DESIGNER", "EARLIEST DATE", "TOTAL AMOUNT");
 		output += retrieveAllQuote(quoteList);
 		System.out.println(output);
 	}
-	
 
 	// ---<< MANAGE USER MENU >>---// Done by: Yolanda
 	public static void manageUser() {
@@ -373,18 +546,18 @@ public class C206_CaseStudy {
 		Appointment a1 = null;
 		boolean exist = false;
 		String name = Helper.readString("Enter Name > ");
-		
+
 		if (checkCustomer(name)) {
-			
+
 			for (Appointment a : appList) {
-				
+
 				if (a.getCustName().equals(name)) {
-					
+
 					System.out.println("User have existing appointment");
 					exist = true;
-					
+
 				} else {
-					
+
 					exist = false;
 				}
 			}
@@ -392,7 +565,7 @@ public class C206_CaseStudy {
 		} else {
 			System.out.println("User is not registered");
 		}
-		
+
 		if (exist == false) {
 			a1 = checkDesiApp(name);
 		}
@@ -466,7 +639,7 @@ public class C206_CaseStudy {
 		}
 		return check;
 	}
-	
+
 	private static boolean checkDesigner(String user) {
 		boolean check = false;
 		for (User u : userList) {
@@ -499,12 +672,12 @@ public class C206_CaseStudy {
 
 		address = Helper.readString("Enter address > ");
 		boolean checkAddress = validInput("Address", address);
-		
+
 		while (checkAddress != true) {
 			address = Helper.readString("Enter address > ");
 			checkAddress = validInput("Address", address);
 		}
-		
+
 		date = Helper.readString("Enter date [dd-mm-yyyy] > ");
 		boolean checkDate = validInput("Date", date) && chkCurDate(date);
 
@@ -512,21 +685,20 @@ public class C206_CaseStudy {
 			date = Helper.readString("Enter date [dd-mm-yyyy] > ");
 			checkDate = validInput("Date", date) && chkCurDate(date);
 		}
-		
+
 		time = Helper.readString("Enter time [0000] > ");
 		boolean checkTime = validInput("Time", time);
-		
+
 		while (checkTime != true) {
 			time = Helper.readString("Enter time [0000] > ");
 			checkTime = validInput("Time", time);
 		}
 		t2 = Integer.parseInt(time);
-		
-		
+
 		while (check != true) {
 			viewAllDesigner(userList);
 			designer = Helper.readString("Enter designer name > ");
-			
+
 			for (User u : userList) {
 				if (u.getName().equals(designer)) {
 					if (appList.size() != 0) {
@@ -534,28 +706,28 @@ public class C206_CaseStudy {
 							if (a.getDesigner().equals(designer) && a.getDate().equals(date) && a.getTime() == t2) {
 								// Designer already have existing appointment = Cannot add
 								System.out.println("Designer already has an appointment on this date and time");
-								
-								//Get user to select a different date and time
+
+								// Get user to select a different date and time
 								date = Helper.readString("Enter date [dd-mm-yyyy] > ");
 								checkDate = validInput("Date", date) && chkCurDate(date);
 								while (checkDate != true) {
 									date = Helper.readString("Enter date [dd-mm-yyyy] > ");
 									checkDate = validInput("Date", date) && chkCurDate(date);
 								}
-								
+
 								time = Helper.readString("Enter time [0000] > ");
 								checkTime = validInput("Time", time);
-								
+
 								while (checkTime != true) {
 									time = Helper.readString("Enter time [0000] > ");
 									checkTime = validInput("Time", time);
 								}
-									
+
 							} else if (!(a.getDesigner().equals(designer))) {
 								// Cannot find designer in appointment list = Can add
 								check = true;
 								break;
-								
+
 							} else if (a.getDesigner().equals(designer)) {
 								// Designer is free = Can add
 								check = true;
@@ -572,8 +744,7 @@ public class C206_CaseStudy {
 			// Create new Appointment object
 			if (check == true) {
 				a1 = new Appointment(name, date, t2, designer, address);
-			}
-			else {
+			} else {
 				System.out.println("Invalid designer");
 			}
 		}
@@ -617,8 +788,22 @@ public class C206_CaseStudy {
 			check = Pattern.matches(patternRec, input);
 		} else if (type.equals("Reno Des")) {
 			String patternRed = ".*";
-			check = Pattern.matches(patternRed, input);{
-			}
+			check = Pattern.matches(patternRed, input);
+		} else if (type.equals("Property Type")) {
+			String patternProperty = "\\b(HDB\\b|Private\\b|Landed)\\b";
+			check = Pattern.matches(patternProperty, input);
+		} else if (type.equals("Area Size")) {
+			String patternAreaSize = "^([1-9][0-9]{0,2}|1000)$";
+			check = Pattern.matches(patternAreaSize, input);
+		} else if (type.equals("Renovation Type")) {
+			String patternRenType = "\\b(Whole House\\b|Room\\b|Kitchen\\b|Toilet)\\b";
+			check = Pattern.matches(patternRenType, input);
+		} else if (type.equals("Number of Items")) {
+			String patternNoOfItems = "^[0-9]|[1-9][0-9]";
+			check = Pattern.matches(patternNoOfItems, input);
+		} else if (type.equals("Status")) {
+			String patternStatus = "\\b(Urgent\\b|Okay)\\b";
+			check = Pattern.matches(patternStatus, input);
 		}
 		return check;
 	}
@@ -632,7 +817,7 @@ public class C206_CaseStudy {
 			cDate = DATE_FORMAT.parse(cDATE);
 			appDate = DATE_FORMAT.parse(date);
 			int result = appDate.compareTo(cDate);
-			
+
 			if (result == 0) {
 				System.out.println("Date cannot be today");
 				checked = false;

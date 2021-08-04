@@ -11,6 +11,7 @@
  *
  */
 public class Request {
+	private int requestID;
 	private String propertyType;
 	private int areaSize;
 	private String requestName;
@@ -27,10 +28,10 @@ public class Request {
 	private String status;
 
 	// constructor with Renovation Style
-	public Request(String propertyType, int areaSize, String requestName, int cNumber, String email, int budget,
-			String tgtCompletionDate, String renovationType, int noOfRooms, int noOfToilets, String renoStyle,
-			String status, String requestDate) {
-
+	public Request(int requestID, String propertyType, int areaSize, String requestName, int cNumber, String email,
+			int budget, String tgtCompletionDate, String renovationType, int noOfRooms, int noOfToilets,
+			String renoStyle, String status, String requestDate) {
+		this.requestID = requestID;
 		this.propertyType = propertyType;
 		this.areaSize = areaSize;
 		this.requestName = requestName;
@@ -48,14 +49,14 @@ public class Request {
 
 	// constructor without Renovation Style
 
-	public Request(String propertyType, int areaSize, String requestName, int cNumber, String email, int budget,
-			String tgtCompletionDate, String renovationType, int noOfRooms, int noOfToilets, String status,
+	public Request(int requestID, String propertyType, int areaSize, String requestName, int cNumber, String email,
+			int budget, String tgtCompletionDate, String renovationType, int noOfRooms, int noOfToilets, String status,
 			String requestDate) {
-
+		this.requestID = requestID;
 		this.propertyType = propertyType;
 		this.areaSize = areaSize;
 		this.requestName = requestName;
-		CNumber = cNumber;
+		this.CNumber = cNumber;
 		this.email = email;
 		this.budget = budget;
 		this.tgtCompletionDate = tgtCompletionDate;
@@ -64,6 +65,14 @@ public class Request {
 		this.noOfToilets = noOfToilets;
 		this.status = status;
 		this.requestDate = requestDate;
+	}
+
+	/**
+	 * @return the requestID
+	 */
+
+	public int getRequestID() {
+		return requestID;
 	}
 
 	/**
@@ -150,13 +159,15 @@ public class Request {
 		return requestDate;
 	}
 
-	public boolean isUrgent() { //WORK IN PROGRESS TO CHECK URGENCY BASED ON MONTH
+	public boolean isUrgent() { // WORK IN PROGRESS TO CHECK URGENCY BASED ON MONTH
 		int urgency = 0;
-		// char reqMth = requestDate.charAt(6);
-		// char tgtMth = tgtCompletionDate.charAt(6);
-		// urgency = tgtMth - reqMth;
-		String[]dateSplit	= requestDate.split("-");
-		// date format would be DD-MM-YY, check if tgtMM
+		String[] reqSplit = requestDate.split("-");
+		String[] tgtSplit = tgtCompletionDate.split("-");
+		int reqMth = Integer.parseInt(reqSplit[1]);
+		int tgtMth = Integer.parseInt(tgtSplit[1]);
+
+		urgency = tgtMth - reqMth;
+		// date format would be DD-MM-YYYY, check if tgtMM
 		// - reqMM is 3 or less
 		if (urgency <= 3) {
 
@@ -189,8 +200,8 @@ public class Request {
 	}
 
 	public String doStringRequest() {
-		return String.format("%-10s %-10d %-10s %-10d %-10s %-10d %-10s %-10s %-10d %-10d %-10s %-10d %-10s %-10s\n",
-				getPropertyType(), getAreaSize(), getRequestName(), getCNumber(), getEmail(), getBudget(),
+		return String.format("%-10d %-10s %-10d %-10s %-10d %-10s %-10d %-10s %-10s %-10d %-10d %-10s %-10d %-10s %-10s\n",
+				getRequestID(), getPropertyType(), getAreaSize(), getRequestName(), getCNumber(), getEmail(), getBudget(),
 				getTgtCompletionDate(), getRenovationType(), getNoOfRooms(), getNoOfToilets(), getRenoStyle(),
 				getRequestDate(), getStatus());
 
