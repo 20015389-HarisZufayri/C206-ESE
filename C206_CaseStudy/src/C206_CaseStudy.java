@@ -562,7 +562,7 @@ public class C206_CaseStudy {
 		} else if (type.equals("Quotation ID")) {
 			String patternQid = "\\d+";
 			check = Pattern.matches(patternQid, input);
-		} else if (type.equals("Total Quotation Outcome")) {
+		} else if (type.equals("Total Quotation Amount")) {
 			String patternTqo = "^[\\d]+[\\.][\\d]{2}$";
 			check = Pattern.matches(patternTqo, input);
 		} else if (type.equals("Reno Cat")) {
