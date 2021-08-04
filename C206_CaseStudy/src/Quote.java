@@ -12,25 +12,25 @@
  */
 public class Quote {
 	
-	private int requestID;
-	private int quotationID;
+	private String requestID;
+	private String quotationID;
 	private String renoCat;
 	private String renoDes;
 	private String dName;
 	private String eDate;
-	private double totalAmount;
-	/**
+	private String totalAmount;
+	
+			/**
 	 * @param requestID
 	 * @param quotationID
 	 * @param renoCat
 	 * @param renoDes
-	 * @param renoPrice
 	 * @param dName
 	 * @param eDate
 	 * @param totalAmount
 	 */
-	public Quote(int requestID, int quotationID, String renoCat, String renoDes, String dName,
-			String eDate, double totalAmount) {
+	public Quote(String requestID, String quotationID, String renoCat, String renoDes, String dName, String eDate,
+			String totalAmount) {
 		this.requestID = requestID;
 		this.quotationID = quotationID;
 		this.renoCat = renoCat;
@@ -39,16 +39,16 @@ public class Quote {
 		this.eDate = eDate;
 		this.totalAmount = totalAmount;
 	}
-	/**
+			/**
 	 * @return the requestID
 	 */
-	public int getRequestID() {
+	public String getRequestID() {
 		return requestID;
 	}
 	/**
 	 * @return the quotationID
 	 */
-	public int getQuotationID() {
+	public String getQuotationID() {
 		return quotationID;
 	}
 	/**
@@ -78,12 +78,12 @@ public class Quote {
 	/**
 	 * @return the totalAmount
 	 */
-	public double getTotalAmount() {
+	public String getTotalAmount() {
 		return totalAmount;
 	}
 
 	public String doStringQuote() {
-		return String.format("%-10d %-10d %-10s %-10s %-10s %-10s %-10.2f\n", getRequestID(), getQuotationID(), getRenoCat(), 
+		return String.format("%-15s %-15s %-15s %-15s %-15s %-15s %s\n", getRequestID(), getQuotationID(), getRenoCat(), 
 				getRenoDes(), getdName(), geteDate(), getTotalAmount());
 
 	}
