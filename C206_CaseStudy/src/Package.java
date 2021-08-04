@@ -11,8 +11,8 @@ import java.time.LocalDateTime;
 public class Package {
 	private String packagecode;
 	private String packageDesc;
-	private LocalDateTime packageStart;
-	private LocalDateTime packageEnd;
+	private String packageStart;
+	private String packageEnd;
 	private int packageAmt;
 	/**
 	 * @param packagecode
@@ -21,7 +21,7 @@ public class Package {
 	 * @param packageEnd
 	 * @param packageAmt
 	 */
-	public Package(String packagecode, String packageDesc, LocalDateTime packageStart, LocalDateTime packageEnd,
+	public Package(String packagecode, String packageDesc, String packageStart, String packageEnd,
 			int packageAmt) {
 		this.packagecode = packagecode;
 		this.packageDesc = packageDesc;
@@ -44,13 +44,13 @@ public class Package {
 	/**
 	 * @return the packageStart
 	 */
-	public LocalDateTime getPackageStart() {
+	public String getPackageStart() {
 		return packageStart;
 	}
 	/**
 	 * @return the packageEnd
 	 */
-	public LocalDateTime getPackageEnd() {
+	public String getPackageEnd() {
 		return packageEnd;
 	}
 	/**
@@ -60,7 +60,7 @@ public class Package {
 		return packageAmt;
 	}
 	public String doStringPackage() {
-		return String.format("%-10s %-10s %-10d %-10s %s\n", getPackagecode(), getPackageDesc(), getPackageStart(),
+		return String.format("%-10s %-10s %-10d %-10s -10%d\n", getPackagecode(), getPackageDesc(), getPackageStart(),
 		getPackageEnd(), getPackageAmt());
 	}
 	
