@@ -1,4 +1,5 @@
-import java.util.ArrayList;
+import java.util.*;
+import java.text.*;
 import java.util.regex.Pattern;
 
 public class C206_CaseStudy {
@@ -8,14 +9,18 @@ public class C206_CaseStudy {
 	private static ArrayList<User> userList = new ArrayList<User>();
 	private static ArrayList<Appointment> appList = new ArrayList<Appointment>();
 
+	private static Date CURRENT_DATE = new Date();
+	private static DateFormat DATE_FORMAT = new SimpleDateFormat("dd-mm-yyyy");
+	private static String cDATE = DATE_FORMAT.format(CURRENT_DATE);
+
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		userList.add(new Customer("Shino", "9395-9352", "shino@gmail.com", "Customer"));
 		userList.add(new Designer("Kuro", "9395-9312", "kuroRA@gmail.com", "Designer"));
-		
+
 		userList.add(new Customer("Yolanda", "9395-123", "yolanda@gmail.com", "Customer"));
 
-		appList.add(new Appointment("Shino", "2021-05-06", 1500, "Kuro", "River Valley 2510"));
+		appList.add(new Appointment("Shino", "06-05-2021", 1500, "Kuro", "River Valley 2510"));
 
 		int option = 0;
 		while (option != OPTION_QUIT) {
@@ -129,11 +134,9 @@ public class C206_CaseStudy {
 		User u1 = null;
 
 		String name = Helper.readString("Enter name > ");
-		
-		
-		
+
 		if (checkUser(name) == false) {
-			
+
 			boolean nameCheck = validInput("Name", name);
 
 			String mobile = Helper.readString("Enter mobile [0000-0000] > ");
@@ -144,7 +147,7 @@ public class C206_CaseStudy {
 
 			String role = Helper.readString("Enter role [Customer|Designer] > ");
 			boolean roleCheck = validInput("Role", role);
-			
+
 			if (nameCheck && mobileCheck && emailCheck && roleCheck) {
 				if (role.equals("Customer") || role.equals("Client")) {
 					u1 = new Customer(name, mobile, email, role);
@@ -157,8 +160,7 @@ public class C206_CaseStudy {
 				System.out.println("Invalid input");
 
 			}
-		}
-		else {
+		} else {
 			System.out.println("User is already registered");
 		}
 
@@ -243,25 +245,32 @@ public class C206_CaseStudy {
 	// ---<< MANAGE APPOINTMENT: ADD APPOINTMENT >>---// Done by: Yolanda
 	public static Appointment inputApp() {
 		Appointment a1 = null;
-
+		boolean exist = false;
 		String name = Helper.readString("Enter Name > ");
+		
 		if (checkUser(name)) {
+			
 			for (Appointment a : appList) {
+				
 				if (a.getCustName().equals(name)) {
-
+					
 					System.out.println("User have existing appointment");
-					break;
+					exist = true;
+					
 				} else {
-
-					a1 = checkDesigner(name);
-					return a1;
+					
+					exist = false;
 				}
 			}
 
 		} else {
 			System.out.println("User is not registered");
 		}
-		return null;
+		
+		if (exist == false) {
+			a1 = checkDesigner(name);
+		}
+		return a1;
 	}
 
 	public static void addApp(ArrayList<Appointment> appList, Appointment a1) {
@@ -348,64 +357,87 @@ public class C206_CaseStudy {
 
 		address = Helper.readString("Enter address > ");
 		boolean checkAddress = validInput("Address", address);
+		
+		while (checkAddress != true) {
+			address = Helper.readString("Enter address > ");
+			checkAddress = validInput("Address", address);
+		}
+		
+		date = Helper.readString("Enter date [dd-mm-yyyy] > ");
+		boolean checkDate = validInput("Date", date) && chkCurDate(date);
 
-		date = Helper.readString("Enter date [yyyy-MM-dd] > ");
-		boolean checkDate = validInput("Date", date);
-
+		while (checkDate != true) {
+			date = Helper.readString("Enter date [dd-mm-yyyy] > ");
+			checkDate = validInput("Date", date) && chkCurDate(date);
+		}
+		
 		time = Helper.readString("Enter time [0000] > ");
 		boolean checkTime = validInput("Time", time);
 		
-		if (checkAddress && checkDate && checkTime) {
-			t2 = Integer.parseInt(time);
-
-			while (check != true) {
-				viewAllDesigner(userList);
-				designer = Helper.readString("Enter designer name > ");
-
-				for (User u : userList) {
-					if (u.getName().equals(designer)) {
-						if (appList.size() != 0) {
-							for (Appointment a : appList) {
-								if (a.getDesigner().equals(designer) && a.getDate().equals(date) && a.getTime() == t2) {
-									// Designer already have existing appointment = Cannot add
-									System.out.println("Designer already has an appointment on this date and time");
-
-
-									date = Helper.readString("Enter date [yyyy-MM-dd] > ");
-									
+		while (checkTime != true) {
+			time = Helper.readString("Enter time [0000] > ");
+			checkTime = validInput("Time", time);
+		}
+		t2 = Integer.parseInt(time);
+		
+		
+		while (check != true) {
+			viewAllDesigner(userList);
+			designer = Helper.readString("Enter designer name > ");
+			
+			for (User u : userList) {
+				if (u.getName().equals(designer)) {
+					if (appList.size() != 0) {
+						for (Appointment a : appList) {
+							if (a.getDesigner().equals(designer) && a.getDate().equals(date) && a.getTime() == t2) {
+								// Designer already have existing appointment = Cannot add
+								System.out.println("Designer already has an appointment on this date and time");
+								
+								date = Helper.readString("Enter date [dd-mm-yyyy] > ");
+								checkDate = validInput("Date", date) && chkCurDate(date);
+								while (checkDate != true) {
+									date = Helper.readString("Enter date [dd-mm-yyyy] > ");
+									checkDate = validInput("Date", date) && chkCurDate(date);
+								}
+								
+								time = Helper.readString("Enter time [0000] > ");
+								checkTime = validInput("Time", time);
+								
+								while (checkTime != true) {
 									time = Helper.readString("Enter time [0000] > ");
+									checkTime = validInput("Time", time);
+								}
 							
 									
-								} else if (!(a.getDesigner().equals(designer))) {
-									// Cannot find designer in appointment list = Can add
-									check = true;
-									break;
-								} else if (a.getDesigner().equals(designer)) {
-
-									// Designer is free = Can add
-									check = true;
-									break;
-								}
+							} else if (!(a.getDesigner().equals(designer))) {
+								// Cannot find designer in appointment list = Can add
+								check = true;
+								break;
+								
+							} else if (a.getDesigner().equals(designer)) {
+								// Designer is free = Can add
+								check = true;
+								break;
 							}
-						} else {
-							// If there are nothing in array = Can add
-							check = true;
-							break;
 						}
+					} else {
+						// If there are nothing in array = Can add
+						check = true;
+						break;
 					}
 				}
-				System.out.println("Invalid Designer");
 			}
 			// Create new Appointment object
 			if (check == true) {
 				a1 = new Appointment(name, date, t2, designer, address);
 			}
-		} else {
-			System.out.println("Invalid input");
+			else {
+				System.out.println("Invalid designer");
+			}
 		}
 		return a1;
 	}
-	
+
 	public static boolean validInput(String type, String input) {
 		boolean check = false;
 		if (type.equals("Name")) {
@@ -424,12 +456,40 @@ public class C206_CaseStudy {
 			String patternAddress = "\\D{1,}";
 			check = Pattern.matches(patternAddress, input);
 		} else if (type.equals("Date")) {
-			String patternDate = "^\\d{4}\\-(0?[1-9]|1[012])\\-(0?[1-9]|[12][0-9]|3[01])$";
+			String patternDate = "^(0[1-9]|[12][0-9]|3[01])[-](0[1-9]|1[012])[-](19|20)\\d\\d$";
 			check = Pattern.matches(patternDate, input);
 		} else if (type.equals("Time")) {
 			String patternTime = "^([01][0-9]|2[0-3])([0-5][0-9])$";
 			check = Pattern.matches(patternTime, input);
 		}
 		return check;
+	}
+
+	public static boolean chkCurDate(String date) {
+
+		Date appDate;
+		Date cDate;
+		boolean checked = false;
+		try {
+			cDate = DATE_FORMAT.parse(cDATE);
+			appDate = DATE_FORMAT.parse(date);
+			int result = appDate.compareTo(cDate);
+			
+			if (result == 0) {
+				System.out.println("Date cannot be today");
+				checked = false;
+			} else if (result > 0) {
+				checked = true;
+			} else if (result < 0) {
+				System.out.println("Invalid date");
+				checked = false;
+			}
+
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			System.out.println("Invalid date");
+			checked = false;
+		}
+		return checked;
 	}
 }
