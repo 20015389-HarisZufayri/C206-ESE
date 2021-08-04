@@ -21,6 +21,8 @@ public class C206_CaseStudy {
 		userList.add(new Customer("Yolanda", "9395-123", "yolanda@gmail.com", "Customer"));
 
 		appList.add(new Appointment("Shino", "06-05-2021", 1500, "Kuro", "River Valley 2510"));
+		
+		quoteList.add(new Quote("1", "1","Kitchen","Tiles - $3000", "Kuro", "12-08-2021", "3000.00"));
 
 		int option = 0;
 		while (option != OPTION_QUIT) {
@@ -40,6 +42,7 @@ public class C206_CaseStudy {
 
 			} else if (option == 4) {
 				// Manage Quotation
+				C206_CaseStudy.manageQuote();
 
 			} else if (option == 5) {
 				// Manage Appointment
@@ -69,6 +72,113 @@ public class C206_CaseStudy {
 		System.out.println(header);
 		Helper.line(80, "-");
 	}
+	
+	public static void menu() {
+		C206_CaseStudy.setHeader("RENOVATION ACE");
+		System.out.println("1. Manage User");
+		System.out.println("2. Manage Package");
+		System.out.println("3. Manage Request for Quotation");
+		System.out.println("4. Manage Quotation");
+		System.out.println("5. Manage Appointment");
+		System.out.println("6. Logout");
+		Helper.line(80, "-");
+	}
+
+	public static void setHeader(String header) {
+		Helper.line(80, "-");
+		System.out.println(header);
+		Helper.line(80, "-");
+	}
+	
+	//Manage quote menu by RX
+	public static void manageQuote() {
+		C206_CaseStudy.setHeader("MANAGE QUOTE");
+		System.out.println("1. Add New Quote");
+		System.out.println("2. View All Quote");
+		System.out.println("3. Delete Quote");
+		System.out.println("4. Back");
+		Helper.line(80, "-");
+
+		int Choice = Helper.readInt("Enter an option > ");
+		
+		if (Choice == 1) {
+			Quote q1 = inputQuote();
+			C206_CaseStudy.addQuote(quoteList, q1);
+		} else if (Choice == 2) {
+			C206_CaseStudy.viewAllQuote(quoteList);
+		} else if (Choice == 3) {
+//			User u1 = C206_CaseStudy.inputDeleteUser();
+//			C206_CaseStudy.deleteUser(userList, u1);
+		} else if (Choice == 4) {
+			C206_CaseStudy.menu();
+		} else if (Choice > 4 || Choice < 0) {
+//			System.out.println("Invalid option");
+//			C206_CaseStudy.menu();
+
+		}
+	}
+	
+	//Manage quote add by RX
+	public static Quote inputQuote() {
+		
+		Quote q1 = null;
+		
+		String requestid = Helper.readString("Enter Request ID > ");
+		boolean requestidCheck = validInput("Request ID", requestid);
+		
+		String quotationid = Helper.readString("Enter Quotation ID > ");
+		boolean quotationidCheck = validInput("Quotation ID", quotationid);
+		
+		String renoC = Helper.readString("Enter Reno Category [Bedroom|Kitchen|Living Room] > ");
+		boolean renoCheck = validInput("Reno Cat", renoC);
+		
+		String renoD = Helper.readString("Enter Reno Description > ");
+		boolean renoDCheck = validInput("Reno Des", renoD);
+		
+		String desName = Helper.readString("Enter Name > ");
+		boolean desNameCheck = validInput("Name", desName);
+		
+		String earDate = Helper.readString("Enter Date [yyyy-MM-dd] > ");
+		boolean earDateCheck = validInput("Date", earDate);
+		
+		String tAmount = Helper.readString("Enter Total Quotation Amount [0000.00] > ");
+		boolean tAmountCheck = validInput("Total Quotation Amount", tAmount);
+		
+		if (requestidCheck && quotationidCheck && renoCheck && renoDCheck
+				&& desNameCheck && earDateCheck && tAmountCheck ) {
+			q1 = new Quote(requestid, quotationid, renoC, renoD,
+				desName , earDate, tAmount);
+		} else {
+				System.out.println("Invalid Input");
+			}
+		return q1;
+		}
+	
+	public static void addQuote(ArrayList<Quote> quoteList, Quote q1) {
+
+		if (q1 != null && quoteList.add(q1)) {
+			System.out.println("Quote successfully added");
+		}
+	}
+	
+	//Manage quote view by RX
+	public static String retrieveAllQuote(ArrayList<Quote> quoteList) {
+		String output = "";
+
+		for (Quote q : quoteList) {
+			output += String.format("%s", q.doStringQuote());
+		}
+		return output;
+	}
+	
+	public static void viewAllQuote(ArrayList<Quote> quoteList) {
+		C206_CaseStudy.setHeader("QUOTATION LIST");
+		String output = String.format("%-15s %-15s %-15s %-15s %-15s %-15s %s\n", 
+				"REQUEST ID", "QUOTATION ID", "CATEGORY", "DESCRIPTION", "DESIGNER", "EARLIEST DATE", "TOTAL AMOUNT");
+		output += retrieveAllQuote(quoteList);
+		System.out.println(output);
+	}
+	
 
 	// ---<< MANAGE USER MENU >>---// Done by: Yolanda
 	public static void manageUser() {
@@ -461,6 +571,22 @@ public class C206_CaseStudy {
 		} else if (type.equals("Time")) {
 			String patternTime = "^([01][0-9]|2[0-3])([0-5][0-9])$";
 			check = Pattern.matches(patternTime, input);
+		} else if (type.equals("Request ID")) {
+			String patternRid = "\\d+";
+			check = Pattern.matches(patternRid, input);
+		} else if (type.equals("Quotation ID")) {
+			String patternQid = "\\d+";
+			check = Pattern.matches(patternQid, input);
+		} else if (type.equals("Total Quotation Outcome")) {
+			String patternTqo = "^[1-9](.)?[0-9]?[0-9]";
+			check = Pattern.matches(patternTqo, input);
+		} else if (type.equals("Reno Cat")) {
+			String patternRec = "\\b(Bedroom\\b|Kitchen\\b|Living Room)\\b";
+			check = Pattern.matches(patternRec, input);
+		} else if (type.equals("Reno Des")) {
+			String patternRed = ".*";
+			check = Pattern.matches(patternRed, input);{
+			}
 		}
 		return check;
 	}
