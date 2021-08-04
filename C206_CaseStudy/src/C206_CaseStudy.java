@@ -92,17 +92,48 @@ public class C206_CaseStudy {
 		} else if (Choice == 2) {
 			C206_CaseStudy.viewAllQuote(quoteList);
 		} else if (Choice == 3) {
-//			User u1 = C206_CaseStudy.inputDeleteUser();
-//			C206_CaseStudy.deleteUser(userList, u1);
+			Quote q1 = C206_CaseStudy. inputDeleteQuote();
+			C206_CaseStudy.deleteQuote(quoteList, q1);
 		} else if (Choice == 4) {
 			C206_CaseStudy.menu();
 		} else if (Choice > 4 || Choice < 0) {
-//			System.out.println("Invalid option");
-//			C206_CaseStudy.menu();
+			System.out.println("Invalid option");
+			C206_CaseStudy.menu();
 
 		}
 	}
 	
+	/**
+	 * @return
+	 */
+	//Manage quote delete by RX
+	public static Quote inputDeleteQuote() {
+		Quote q1 = null;
+		if (quoteList.size() != 0) {
+			String quotationid = Helper.readString("Enter Quotation ID > ");
+			for (Quote q : quoteList) {
+				if (q.getQuotationID().equals(quotationid)) {
+					q1 = q;
+
+				}
+			}
+		} else {
+			System.out.println("There are no quotes");
+		}
+		return q1;
+	}
+	
+	
+	public static void deleteQuote(ArrayList<Quote> quoteList, Quote q1) {
+			if (q1 != null && quoteList.remove(q1)) {
+				System.out.println("User successfully deleted");
+			} else {
+				System.out.println("Invalid user for deletion");
+			}
+
+	}
+
+
 	//Manage quote add by RX
 	public static Quote inputQuote() {
 		
@@ -619,4 +650,3 @@ public class C206_CaseStudy {
 		}
 		return checked;
 	}
-}
