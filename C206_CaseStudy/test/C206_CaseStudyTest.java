@@ -19,7 +19,6 @@ public class C206_CaseStudyTest {
 	private ArrayList<User> userList;
 	private ArrayList<Appointment> appList;
 	
-	private 
 	 
 	public C206_CaseStudyTest() {
 		super();
@@ -52,7 +51,7 @@ public class C206_CaseStudyTest {
 	}
 
 	@Test
-	public void addUserTest() {
+	public void addUserTest() { //Done by: Yolanda
 		
 		assertNotNull(userList);
 
@@ -67,7 +66,7 @@ public class C206_CaseStudyTest {
 	
 	
 	@Test
-	public void retrieveAllCustomerTest() {
+	public void retrieveAllCustomerTest() { //Done by: Yolanda
 		assertNotNull(userList);
 		
 		String allCustomer= C206_CaseStudy.retrieveAllCustomer(userList);
@@ -87,7 +86,7 @@ public class C206_CaseStudyTest {
 	}
 	
 	@Test
-	public void retrieveAllDesignerTest() {
+	public void retrieveAllDesignerTest() { //Done by: Yolanda
 		assertNotNull(userList);
 		
 		String allDesigner= C206_CaseStudy.retrieveAllDesigner(userList);
@@ -107,7 +106,7 @@ public class C206_CaseStudyTest {
 	}
 	
 	@Test
-	public void deleteUserTest() {
+	public void deleteUserTest() { //Done by: Yolanda
 		assertNotNull(userList);
 		
 		C206_CaseStudy.addUser(userList, c1);
@@ -124,7 +123,7 @@ public class C206_CaseStudyTest {
 	}
 	
 	@Test
-	public void addAppTest() {
+	public void addAppTest() { //Done by: Yolanda
 		
 		assertNotNull(appList);
 
@@ -139,11 +138,8 @@ public class C206_CaseStudyTest {
 	
 	
 	@Test
-	public void retrieveAllAppTest() {
+	public void retrieveAllAppTest() { //Done by: Yolanda
 		assertNotNull(appList);
-		
-		C206_CaseStudy.addUser(userList, c1);
-		C206_CaseStudy.addUser(userList, c2);
 		
 		String allApp= C206_CaseStudy.retrieveAllAppointment(appList);
 		String testOutput = "";
@@ -162,11 +158,8 @@ public class C206_CaseStudyTest {
 	}
 	
 	@Test
-	public void deleteAppTest() {
-		assertNotNull(userList);
-		
-		C206_CaseStudy.addUser(userList, c1);
-		C206_CaseStudy.addUser(userList, c2);
+	public void deleteAppTest() { //Done by: Yolanda
+		assertNotNull(appList);
 		
 		C206_CaseStudy.addApp(appList, a1);
 		C206_CaseStudy.addApp(appList, a2);

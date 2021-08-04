@@ -129,29 +129,39 @@ public class C206_CaseStudy {
 		User u1 = null;
 
 		String name = Helper.readString("Enter name > ");
-		boolean nameCheck = validInput("Name", name);
+		
+		
+		
+		if (checkUser(name) == false) {
+			
+			boolean nameCheck = validInput("Name", name);
 
-		String mobile = Helper.readString("Enter mobile [0000-0000] > ");
-		boolean mobileCheck = validInput("Mobile", mobile);
+			String mobile = Helper.readString("Enter mobile [0000-0000] > ");
+			boolean mobileCheck = validInput("Mobile", mobile);
 
-		String email = Helper.readString("Enter email > ");
-		boolean emailCheck = validInput("Email", email);
+			String email = Helper.readString("Enter email > ");
+			boolean emailCheck = validInput("Email", email);
 
-		String role = Helper.readString("Enter role [Customer|Designer] > ");
-		boolean roleCheck = validInput("Role", role);
+			String role = Helper.readString("Enter role [Customer|Designer] > ");
+			boolean roleCheck = validInput("Role", role);
+			
+			if (nameCheck && mobileCheck && emailCheck && roleCheck) {
+				if (role.equals("Customer") || role.equals("Client")) {
+					u1 = new Customer(name, mobile, email, role);
 
-		if (nameCheck && mobileCheck && emailCheck && roleCheck) {
-			if (role.equals("Customer") || role.equals("Client")) {
-				u1 = new Customer(name, mobile, email, role);
+				} else if (role.equalsIgnoreCase("Designer")) {
+					u1 = new Designer(name, mobile, email, role);
 
-			} else if (role.equalsIgnoreCase("Designer")) {
-				u1 = new Designer(name, mobile, email, role);
+				}
+			} else {
+				System.out.println("Invalid input");
 
 			}
-		} else {
-			System.out.println("Invalid input");
-
 		}
+		else {
+			System.out.println("User is already registered");
+		}
+
 		return u1;
 
 	}
@@ -166,7 +176,6 @@ public class C206_CaseStudy {
 	// ---<< MANAGE USER: VIEW CUSTOMER >>---// Done by: Yolanda
 	public static String retrieveAllCustomer(ArrayList<User> userList) {
 		String output = "";
-
 		for (User u : userList) {
 			if (u instanceof Customer) {
 				Customer c = (Customer) u;
