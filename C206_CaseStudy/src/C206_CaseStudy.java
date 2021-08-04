@@ -393,6 +393,7 @@ public class C206_CaseStudy {
 								// Designer already have existing appointment = Cannot add
 								System.out.println("Designer already has an appointment on this date and time");
 								
+								//Get user to select a different date and time
 								date = Helper.readString("Enter date [dd-mm-yyyy] > ");
 								checkDate = validInput("Date", date) && chkCurDate(date);
 								while (checkDate != true) {
@@ -407,7 +408,6 @@ public class C206_CaseStudy {
 									time = Helper.readString("Enter time [0000] > ");
 									checkTime = validInput("Time", time);
 								}
-							
 									
 							} else if (!(a.getDesigner().equals(designer))) {
 								// Cannot find designer in appointment list = Can add
