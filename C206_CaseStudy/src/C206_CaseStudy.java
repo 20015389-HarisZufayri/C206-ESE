@@ -230,7 +230,7 @@ public class C206_CaseStudy {
 
 		String name = Helper.readString("Enter name > ");
 
-		if (checkUser(name) == false) {
+		if (checkCustomer(name) == false) {
 
 			boolean nameCheck = validInput("Name", name);
 
@@ -343,7 +343,7 @@ public class C206_CaseStudy {
 		boolean exist = false;
 		String name = Helper.readString("Enter Name > ");
 		
-		if (checkUser(name)) {
+		if (checkCustomer(name)) {
 			
 			for (Appointment a : appList) {
 				
@@ -363,7 +363,7 @@ public class C206_CaseStudy {
 		}
 		
 		if (exist == false) {
-			a1 = checkDesigner(name);
+			a1 = checkDesiApp(name);
 		}
 		return a1;
 	}
@@ -398,7 +398,7 @@ public class C206_CaseStudy {
 
 		if (appList.size() != 0) {
 			String name = Helper.readString("Enter name > ");
-			if (checkUser(name)) {
+			if (checkCustomer(name)) {
 				for (Appointment a : appList) {
 					if (a.getCustName().equals(name)) {
 						return a;
@@ -420,7 +420,7 @@ public class C206_CaseStudy {
 	}
 
 	// Validate Customer is in system
-	private static boolean checkUser(String user) {
+	private static boolean checkCustomer(String user) {
 		boolean check = false;
 		for (User u : userList) {
 			if (u instanceof Customer) {
@@ -435,10 +435,26 @@ public class C206_CaseStudy {
 		}
 		return check;
 	}
+	
+	private static boolean checkDesigner(String user) {
+		boolean check = false;
+		for (User u : userList) {
+			if (u instanceof Designer) {
+				Designer d = (Designer) u;
+				if (d.getName().equals(user)) {
+					check = true;
+					break;
+				} else {
+					check = false;
+				}
+			}
+		}
+		return check;
+	}
 
 	// Valid Designer is registered and if they have existing appointment on same
 	// input date/time
-	public static Appointment checkDesigner(String name) {
+	public static Appointment checkDesiApp(String name) {
 
 		Appointment a1 = null;
 
