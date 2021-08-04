@@ -13,11 +13,16 @@ public class C206_CaseStudyTest {
 	private Designer d1;
 	private Designer d2;
 	
+	
 	private Appointment a1;
 	private Appointment a2;
 	
+	private Quote q1;
+	private Quote q2;
+	
 	private ArrayList<User> userList;
 	private ArrayList<Appointment> appList;
+	private ArrayList<Quote> quoteList;
 	
 	 
 	public C206_CaseStudyTest() {
@@ -34,9 +39,13 @@ public class C206_CaseStudyTest {
 		
 		a1 = new Appointment("Mizuki","2021-05-02",1500,"Kuro","WhateverThisPlaceIs");
 		a2 = new Appointment("Shino","2021-05-06",1500,"Kuro","Area 69");
+		
+		q1 = new Quote("5", "5","Kitchen","Tiles - $3000", "Kuro", "12-08-2021", "3000.00");
+		q2 = new Quote("7", "7","Bedroom","Windows - $2000", "Kyo", "04-09-2021", "2000.00");
 
 		userList = new ArrayList<User>();
 		appList = new ArrayList<Appointment>();
+		quoteList = new ArrayList<Quote>();
 	}
 
 	@After
@@ -48,6 +57,7 @@ public class C206_CaseStudyTest {
 		d2 = null;
 		userList = null;
 		appList = null;
+		quoteList = null;
 	}
 
 	@Test
@@ -174,5 +184,58 @@ public class C206_CaseStudyTest {
 		assertFalse(test);
 		
 	}
+	
+	
+	@Test
+	public void addQuoteTest() { //Done by: Rx
+		
+		assertNotNull(quoteList);
 
+		C206_CaseStudy.addQuote(quoteList, q1);
+		assertEquals(1, quoteList.size());
+		assertSame(q1, quoteList.get(0));
+
+		C206_CaseStudy.addQuote(quoteList, q2);
+		assertEquals(2, quoteList.size());
+		assertSame(q2, quoteList.get(1));
+	}
+	
+	@Test
+	public void retrieveAllQuoteTest() { //Done by: Rx
+		assertNotNull(quoteList);
+		
+		String allQuote= C206_CaseStudy.retrieveAllQuote(quoteList);
+		String testOutput = "";
+		assertEquals(testOutput, allQuote);
+		
+		C206_CaseStudy.addQuote(quoteList, q1);
+		C206_CaseStudy.addQuote(quoteList, q2);
+		assertEquals(2, quoteList.size());
+		
+		allQuote= C206_CaseStudy.retrieveAllQuote(quoteList);
+		testOutput = String.format("%-15s %-15s %-15s %-15s %-15s %-15s %s\n","5", "5","Kitchen","Tiles - $3000", "Kuro", "12-08-2021", "3000.00");
+		testOutput += String.format("%-15s %-15s %-15s %-15s %-15s %-15s %s\n","7", "7","Bedroom","Windows - $2000", "Kyo", "04-09-2021", "2000.00");
+	
+		assertEquals(testOutput, allQuote);
+		
+	}
+	
+	@Test
+	public void deleteQuoteTest() { //Done by: Rx
+		assertNotNull(quoteList);
+		
+		C206_CaseStudy.addQuote(quoteList, q1);
+		C206_CaseStudy.addQuote(quoteList, q2);
+		
+		C206_CaseStudy.deleteQuote(quoteList, q1);
+		assertEquals(1,quoteList.size());
+		
+		C206_CaseStudy.deleteQuote(quoteList, q2);
+		assertEquals(0,quoteList.size());
+		
+		boolean test = (quoteList.remove(q1));
+		assertFalse(test);
+		
+	}
+	
 }
