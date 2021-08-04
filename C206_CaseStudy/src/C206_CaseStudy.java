@@ -8,6 +8,7 @@ public class C206_CaseStudy {
 
 	private static ArrayList<User> userList = new ArrayList<User>();
 	private static ArrayList<Appointment> appList = new ArrayList<Appointment>();
+	private static ArrayList<Quote> quoteList = new ArrayList<Quote>();
 
 	private static Date CURRENT_DATE = new Date();
 	private static DateFormat DATE_FORMAT = new SimpleDateFormat("dd-mm-yyyy");
