@@ -60,7 +60,7 @@ public class Package {
 		return packageAmt;
 	}
 	public String doStringPackage() {
-		return String.format("%-10s %-10s %-10s %-10s %-10d\n", getPackagecode(), getPackageDesc(), getPackageStart(),
+		return String.format("%-10s %-10s %-10s %-10s %-10s\n", getPackagecode(), getPackageDesc(), getPackageStart(),
 		getPackageEnd(), getPackageAmt());
 	}
 	
