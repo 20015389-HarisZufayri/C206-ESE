@@ -154,7 +154,7 @@ public class C206_CaseStudy {
 		String desName = Helper.readString("Enter Name > ");
 		boolean desNameCheck = validInput("Name", desName);
 		
-		String earDate = Helper.readString("Enter Date [dd-MM-yyyy] > ");
+		String earDate = Helper.readString("Enter Date [yyyy-MM-dd] > ");
 		boolean earDateCheck = validInput("Date", earDate);
 		
 		String tAmount = Helper.readString("Enter Total Quotation Amount [0000.00] > ");
@@ -650,3 +650,4 @@ public class C206_CaseStudy {
 		}
 		return checked;
 	}
+}
