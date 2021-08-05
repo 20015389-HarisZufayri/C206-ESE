@@ -26,7 +26,9 @@ public class C206_CaseStudy {
 		appList.add(new Appointment("Shino", "06-05-2021", 1500, "Kuro", "River Valley 2510"));
 
 		quoteList.add(new Quote("1", "1", "Kitchen", "Tiles - $3000", "Kuro", "12-08-2021", "3000.00"));
-		packageList.add(new Package("W100" , "Fragile", "12-8-2021", "16-8-2021", 5));
+		packageList.add(new Package("W100", "Fragile", "12-8-2021", "16-8-2021", 5));
+		requestList.add(new Request(7, "HDB", 999, "ReqOne", "9395-9352", "haris@gmail.com", "9999.99", "23-08-2021",
+				"Room", 3, 2, "Gothic", "Urgent", "18-07-2020"));
 
 		int option = 0;
 		while (option != OPTION_QUIT) {
@@ -144,10 +146,10 @@ public class C206_CaseStudy {
 		// TODO Auto-generated method stub
 		C206_CaseStudy.setHeader("REQUEST LIST");
 		String output = String.format(
-				"%-10s %-10s %-10s %-10s %-10s %-10s %-10s %-10s %-10s %-10s %-10s %-10s %-10s %-10s\n", "REQUEST ID",
-				"PROPERTY TYPE", "AREA SIZE", "REQUEST NAME", "CONTACT NUMBER", "EMAIL", "BUDGET",
-				"TARGET COMPLETION DATE", "RENOVATION TYPE", "NUMBER OF ROOMS", "NUMBER OF TOILETS", "RENOVATION STYLE",
-				"REQUEST DATE", "STATUS");
+				"%-10s %-10s %-10s %-10s %-10s %-15s %-10s %-10s %-10s %-10s %-10s %-10s %-10s %-10s\n", "REQUEST-ID",
+				"PROPERTY-TYPE", "AREA-SIZE", "REQUEST-NAME", "CONTACT-NUMBER", "EMAIL", "BUDGET",
+				"TARGET-COMPLETION-DATE", "RENOVATION-TYPE", "NUMBER-OF-ROOMS", "NUMBER-OF-TOILETS", "RENOVATION-STYLE",
+				"REQUEST-DATE", "STATUS");
 		output += retrieveAllRequest(requestList);
 		System.out.println(output);
 
@@ -196,16 +198,16 @@ public class C206_CaseStudy {
 		boolean requestNameCheck = validInput("Name", requestName);
 		System.out.println(requestNameCheck);
 
-		int CNumber = Helper.readInt("Enter Contact Number > ");
-		boolean CNumberCheck = validInput("Mobile", String.valueOf(CNumber));
+		String CNumber = Helper.readString("Enter Contact Number > ");
+		boolean CNumberCheck = validInput("Mobile", CNumber);
 		System.out.println(CNumberCheck);
 
 		String email = Helper.readString("Enter Email > ");
 		boolean emailCheck = validInput("Email", email);
 		System.out.println(emailCheck);
 
-		int budget = Helper.readInt("Enter Total Budget Amount > ");
-		boolean budgetCheck = validInput("Total Quotation Amount", String.valueOf(budget));
+		String budget = Helper.readString("Enter Total Budget Amount > ");
+		boolean budgetCheck = validInput("Total Quotation Amount", budget);
 		System.out.println(budgetCheck);
 
 		String tgtCompletionDate = Helper.readString("Enter Completion Date DD-MM-YYYY > ");
@@ -838,7 +840,8 @@ public class C206_CaseStudy {
 		}
 		return checked;
 	}
-	public static void managePackage() { //T
+
+	public static void managePackage() { // T
 		C206_CaseStudy.setHeader("MANAGE PACKAGE");
 		System.out.println("1. Add New Package");
 		System.out.println("2. View All Package");
@@ -865,7 +868,8 @@ public class C206_CaseStudy {
 		}
 
 	}
-	public static Package inputDeletePackage() { //T
+
+	public static Package inputDeletePackage() { // T
 		Package p1 = null;
 		if (packageList.size() != 0) {
 			String packageid = Helper.readString("Enter Package ID > ");
@@ -880,7 +884,8 @@ public class C206_CaseStudy {
 		}
 		return p1;
 	}
-	public static void addPackage(ArrayList<Package> packageList, Package p1) { //T
+
+	public static void addPackage(ArrayList<Package> packageList, Package p1) { // T
 		// TODO Auto-generated method stub
 
 		if (p1 != null && packageList.add(p1)) {
@@ -888,7 +893,8 @@ public class C206_CaseStudy {
 		}
 
 	}
-	public static Package inputPackage() {//T
+
+	public static Package inputPackage() {// T
 		// TODO Auto-generated method stub
 		Package p1 = null;
 
@@ -915,17 +921,18 @@ public class C206_CaseStudy {
 		return p1;
 
 	}
-	public static void viewAllPackage(ArrayList<Package> packageList) {//T
+
+	public static void viewAllPackage(ArrayList<Package> packageList) {// T
 		// TODO Auto-generated method stub
 		C206_CaseStudy.setHeader("PACKAGE LIST");
-		String output = String.format(
-				"%-10s %-30s %-10s %-10s %-10s\n", "PACKAGE ID",
-				"PACKAGE DESCRIPTION", "START DATE", "END DATE", "QUANTITY");
+		String output = String.format("%-10s %-30s %-10s %-10s %-10s\n", "PACKAGE ID", "PACKAGE DESCRIPTION",
+				"START DATE", "END DATE", "QUANTITY");
 		output += retrieveAllPackage(packageList);
 		System.out.println(output);
 
 	}
-	public static String retrieveAllPackage(ArrayList<Package> packageList) {//T
+
+	public static String retrieveAllPackage(ArrayList<Package> packageList) {// T
 		// TODO Auto-generated method stub
 		String output = "";
 
@@ -935,7 +942,8 @@ public class C206_CaseStudy {
 		return output;
 
 	}
-	public static void deletePackage(ArrayList<Package> packageList, Package p1) {//T
+
+	public static void deletePackage(ArrayList<Package> packageList, Package p1) {// T
 		// TODO Auto-generated method stub
 		if (p1 != null && packageList.remove(p1)) {
 			System.out.println("Package successfully deleted");

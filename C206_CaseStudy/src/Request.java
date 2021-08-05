@@ -15,9 +15,9 @@ public class Request {
 	private String propertyType;
 	private int areaSize;
 	private String requestName;
-	private int CNumber;
+	private String CNumber;
 	private String email;
-	private int budget;
+	private String budget;
 	private String tgtCompletionDate;
 	private String renovationType;
 	private int noOfRooms;
@@ -28,8 +28,8 @@ public class Request {
 	private String status;
 
 	// constructor with Renovation Style
-	public Request(int requestID, String propertyType, int areaSize, String requestName, int cNumber, String email,
-			int budget, String tgtCompletionDate, String renovationType, int noOfRooms, int noOfToilets,
+	public Request(int requestID, String propertyType, int areaSize, String requestName, String cNumber, String email,
+			String budget, String tgtCompletionDate, String renovationType, int noOfRooms, int noOfToilets,
 			String renoStyle, String status, String requestDate) {
 		this.requestID = requestID;
 		this.propertyType = propertyType;
@@ -49,8 +49,8 @@ public class Request {
 
 	// constructor without Renovation Style
 
-	public Request(int requestID, String propertyType, int areaSize, String requestName, int cNumber, String email,
-			int budget, String tgtCompletionDate, String renovationType, int noOfRooms, int noOfToilets, String status,
+	public Request(int requestID, String propertyType, int areaSize, String requestName, String cNumber, String email,
+			String budget, String tgtCompletionDate, String renovationType, int noOfRooms, int noOfToilets, String status,
 			String requestDate) {
 		this.requestID = requestID;
 		this.propertyType = propertyType;
@@ -99,7 +99,7 @@ public class Request {
 	/**
 	 * @return the CNumber
 	 */
-	public int getCNumber() {
+	public String getCNumber() {
 		return CNumber;
 	}
 
@@ -113,7 +113,7 @@ public class Request {
 	/**
 	 * @return the budget
 	 */
-	public int getBudget() {
+	public String getBudget() {
 		return budget;
 	}
 
@@ -200,7 +200,7 @@ public class Request {
 	}
 
 	public String doStringRequest() {
-		return String.format("%-10d %-10s %-10d %-10s %-10d %-10s %-10d %-10s %-10s %-10d %-10d %-10s %-10d %-10s %-10s\n",
+		return String.format("%-10d %-13s %-10d %-12s %-14s %-13s %-10s %-22s %-15s %-15d %-17d %-16s %-12s %-10s\n",
 				getRequestID(), getPropertyType(), getAreaSize(), getRequestName(), getCNumber(), getEmail(), getBudget(),
 				getTgtCompletionDate(), getRenovationType(), getNoOfRooms(), getNoOfToilets(), getRenoStyle(),
 				getRequestDate(), getStatus());
