@@ -20,9 +20,13 @@ public class C206_CaseStudyTest {
 	private Quote q1;
 	private Quote q2;
 	
+	private Package p1;
+	private Package p2;
+	
 	private ArrayList<User> userList;
 	private ArrayList<Appointment> appList;
 	private ArrayList<Quote> quoteList;
+	private ArrayList<Package> packageList;
 	
 	 
 	public C206_CaseStudyTest() {
@@ -42,10 +46,15 @@ public class C206_CaseStudyTest {
 		
 		q1 = new Quote("5", "5","Kitchen","Tiles - $3000", "Kuro", "12-08-2021", "3000.00");
 		q2 = new Quote("7", "7","Bedroom","Windows - $2000", "Kyo", "04-09-2021", "2000.00");
+		
+		p1 = new Package("K100" , "Fragile", "14-8-2021", "16-8-2021", 3);
+		p2 = new Package("I200" , "Sturdy", "21-8-2021", "25-8-2021", 8);
+		
 
 		userList = new ArrayList<User>();
 		appList = new ArrayList<Appointment>();
 		quoteList = new ArrayList<Quote>();
+		packageList = new ArrayList<Package>();
 	}
 
 	@After
@@ -237,5 +246,54 @@ public class C206_CaseStudyTest {
 		assertFalse(test);
 		
 	}
+	
+	@Test
+	public void addPackageTest() {//T
+		C206_CaseStudy.addPackage(packageList, p1);
+		assertEquals(1, packageList.size());
+		assertSame(p1, packageList.get(0));
+
+		C206_CaseStudy.addPackage(packageList, p2);
+		assertEquals(2, packageList.size());
+		assertSame(p2, packageList.get(1));
+	}
+	
+	@Test
+	public void retrieveAllPackageTest() { //T
+		assertNotNull(packageList);
+		
+		String allPackage= C206_CaseStudy.retrieveAllPackage(packageList);
+		String testOutput = "";
+		assertEquals(testOutput, allPackage);
+		
+		C206_CaseStudy.addPackage(packageList, p1);
+		C206_CaseStudy.addPackage(packageList, p2);
+		assertEquals(2, packageList.size());
+		
+		allPackage= C206_CaseStudy.retrieveAllPackage(packageList);
+		testOutput = String.format("%-15s %-15s %-15s %-15s %-15d\n","K100" , "Fragile", "14-8-2021", "16-8-2021", 3);
+		testOutput += String.format("%-15s %-15s %-15s %-15s %-15d\n","I200" , "Sturdy", "21-8-2021", "25-8-2021", 8);
+	
+		assertEquals(testOutput, allPackage);
+		
+	}
+	@Test
+	public void deletePackageTest() { //T
+		assertNotNull(packageList);
+		
+		C206_CaseStudy.addPackage(packageList, p1);
+		C206_CaseStudy.addPackage(packageList, p2);
+		
+		C206_CaseStudy.deletePackage(packageList, p1);
+		assertEquals(1,packageList.size());
+		
+		C206_CaseStudy.deletePackage(packageList, p2);
+		assertEquals(0,packageList.size());
+		
+		boolean test = (packageList.remove(p1));
+		assertFalse(test);
+		
+	}
+	
 	
 }

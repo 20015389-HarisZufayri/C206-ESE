@@ -10,6 +10,7 @@ public class C206_CaseStudy {
 	private static ArrayList<Appointment> appList = new ArrayList<Appointment>();
 	private static ArrayList<Quote> quoteList = new ArrayList<Quote>();
 	private static ArrayList<Request> requestList = new ArrayList<Request>();
+	private static ArrayList<Package> packageList = new ArrayList<Package>();
 
 	private static Date CURRENT_DATE = new Date();
 	private static DateFormat DATE_FORMAT = new SimpleDateFormat("dd-mm-yyyy");
@@ -25,6 +26,7 @@ public class C206_CaseStudy {
 		appList.add(new Appointment("Shino", "06-05-2021", 1500, "Kuro", "River Valley 2510"));
 
 		quoteList.add(new Quote("1", "1", "Kitchen", "Tiles - $3000", "Kuro", "12-08-2021", "3000.00"));
+		packageList.add(new Package("W100" , "Fragile", "12-8-2021", "16-8-2021", 5));
 
 		int option = 0;
 		while (option != OPTION_QUIT) {
@@ -38,6 +40,7 @@ public class C206_CaseStudy {
 
 			} else if (option == 2) {
 				// Manage Package
+				C206_CaseStudy.managePackage();
 
 			} else if (option == 3) {
 				// Manage Request for quotation
@@ -835,4 +838,111 @@ public class C206_CaseStudy {
 		}
 		return checked;
 	}
+	public static void managePackage() { //T
+		C206_CaseStudy.setHeader("MANAGE PACKAGE");
+		System.out.println("1. Add New Package");
+		System.out.println("2. View All Package");
+		System.out.println("3. Delete Package");
+		System.out.println("4. Back");
+		Helper.line(80, "-");
+
+		int Choice = Helper.readInt("Enter an option > ");
+
+		if (Choice == 1) {
+			Package p1 = inputPackage();
+			C206_CaseStudy.addPackage(packageList, p1);
+		} else if (Choice == 2) {
+			C206_CaseStudy.viewAllPackage(packageList);
+		} else if (Choice == 3) {
+			Package p1 = C206_CaseStudy.inputDeletePackage();
+			C206_CaseStudy.deletePackage(packageList, p1);
+		} else if (Choice == 4) {
+			C206_CaseStudy.menu();
+		} else if (Choice > 4 || Choice < 0) {
+			System.out.println("Invalid option");
+			C206_CaseStudy.menu();
+
+		}
+
+	}
+	public static Package inputDeletePackage() { //T
+		Package p1 = null;
+		if (packageList.size() != 0) {
+			String packageid = Helper.readString("Enter Package ID > ");
+			for (Package p : packageList) {
+				if (p.getPackagecode() == (packageid)) {
+					p1 = p;
+
+				}
+			}
+		} else {
+			System.out.println("There are no package");
+		}
+		return p1;
+	}
+	public static void addPackage(ArrayList<Package> packageList, Package p1) { //T
+		// TODO Auto-generated method stub
+
+		if (p1 != null && packageList.add(p1)) {
+			System.out.println("Package successfully added");
+		}
+
+	}
+	public static Package inputPackage() {//T
+		// TODO Auto-generated method stub
+		Package p1 = null;
+
+		String packageid = Helper.readString("Enter Package ID > ");
+		boolean packageidCheck = validInput("Request ID", packageid);
+		System.out.println(packageidCheck);
+
+		String packageDesc = Helper.readString("Enter Package Description > ");
+		boolean packageDescCheck = validInput("Package Type", packageDesc);
+		System.out.println(packageDescCheck);
+
+		String packageStart = Helper.readString("Enter Start Date > ");
+		boolean packageStartCheck = validInput("Date", packageStart);
+		System.out.println(packageStartCheck);
+
+		String packageEnd = Helper.readString("Enter End Date > ");
+		boolean packageEndCheck = validInput("Date", packageEnd);
+		System.out.println(packageEndCheck);
+
+		int amount = Helper.readInt("Enter Total Package Amount > ");
+		boolean amountCheck = validInput("Total Package Amount", String.valueOf(amount));
+		System.out.println(amountCheck);
+
+		return p1;
+
+	}
+	public static void viewAllPackage(ArrayList<Package> packageList) {//T
+		// TODO Auto-generated method stub
+		C206_CaseStudy.setHeader("PACKAGE LIST");
+		String output = String.format(
+				"%-10s %-30s %-10s %-10s %-10s\n", "PACKAGE ID",
+				"PACKAGE DESCRIPTION", "START DATE", "END DATE", "QUANTITY");
+		output += retrieveAllPackage(packageList);
+		System.out.println(output);
+
+	}
+	public static String retrieveAllPackage(ArrayList<Package> packageList) {//T
+		// TODO Auto-generated method stub
+		String output = "";
+
+		for (Package p : packageList) {
+			output += String.format("%s", p.doStringPackage());
+		}
+		return output;
+
+	}
+	public static void deletePackage(ArrayList<Package> packageList, Package p1) {//T
+		// TODO Auto-generated method stub
+		if (p1 != null && packageList.remove(p1)) {
+			System.out.println("Package successfully deleted");
+		} else {
+			System.out.println("Invalid package for deletion");
+		}
+
+	}
+
 }
