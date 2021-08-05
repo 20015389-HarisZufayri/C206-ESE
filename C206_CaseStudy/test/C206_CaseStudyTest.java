@@ -23,10 +23,14 @@ public class C206_CaseStudyTest {
 	private Package p1;
 	private Package p2;
 	
+	private Request r1;
+	private Request r2;
+	
 	private ArrayList<User> userList;
 	private ArrayList<Appointment> appList;
 	private ArrayList<Quote> quoteList;
 	private ArrayList<Package> packageList;
+	private ArrayList<Request>requestList;
 	
 	 
 	public C206_CaseStudyTest() {
@@ -50,11 +54,17 @@ public class C206_CaseStudyTest {
 		p1 = new Package("K100" , "Fragile", "14-8-2021", "16-8-2021", 3);
 		p2 = new Package("I200" , "Sturdy", "21-8-2021", "25-8-2021", 8);
 		
+		r1 = new Request(7, "HDB", 999, "ReqOne", "9395-9352", "haris@gmail.com", "9999.99", "23-08-2021",
+				"Room", 3, 2, "Gothic", "Urgent", "18-07-2020");
+		r2= new Request(8, "Private", 674, "ReqTwo", "9375-9432", "kam99@gmail.com", "8062.23", "15-10-2022",
+				"Room", 2, 3, "Modern", "Okay", "01-05-2019");
+		
 
 		userList = new ArrayList<User>();
 		appList = new ArrayList<Appointment>();
 		quoteList = new ArrayList<Quote>();
 		packageList = new ArrayList<Package>();
+		requestList= new ArrayList<Request>();
 	}
 
 	@After
@@ -291,6 +301,56 @@ public class C206_CaseStudyTest {
 		assertEquals(0,packageList.size());
 		
 		boolean test = (packageList.remove(p1));
+		assertFalse(test);
+		
+	}
+	
+	@Test
+	public void addRequestTest() {//- haris
+		C206_CaseStudy.addRequest(requestList, r1);
+		assertEquals(1, requestList.size());
+		assertSame(r1, requestList.get(0));
+
+		C206_CaseStudy.addRequest(requestList, r2);
+		assertEquals(2, requestList.size());
+		assertSame(r2, requestList.get(1));
+	}
+	
+	@Test
+	public void retrieveAllRequestTest() { //- haris
+		assertNotNull(requestList);
+		
+		String allRequest= C206_CaseStudy.retrieveAllRequest(requestList);
+		String testOutput = "";
+		assertEquals(testOutput, allRequest);
+		
+		C206_CaseStudy.addRequest(requestList, r1);
+		C206_CaseStudy.addRequest(requestList, r2);
+		assertEquals(2, requestList.size());
+		
+		allRequest= C206_CaseStudy.retrieveAllRequest(requestList);
+		testOutput = String.format("%-10d %-13s %-10d %-12s %-14s %-13s %-10s %-22s %-15s %-15d %-17d %-16s %-12s %-10s\n",7, "HDB", 999, "ReqOne", "9395-9352", "haris@gmail.com", "9999.99", "23-08-2021",
+				"Room", 3, 2, "Gothic", "Urgent", "18-07-2020");
+		testOutput += String.format("%-10d %-13s %-10d %-12s %-14s %-13s %-10s %-22s %-15s %-15d %-17d %-16s %-12s %-10s\n",8, "Private", 674, "ReqTwo", "9375-9432", "kam99@gmail.com", "8062.23", "15-10-2022",
+				"Room", 2, 3, "Modern", "Okay", "01-05-2019");
+	
+		assertEquals(testOutput, allRequest);
+		
+	}
+	@Test
+	public void deleteRequestTest() { // - haris
+		assertNotNull(requestList);
+		
+		C206_CaseStudy.addRequest(requestList, r1);
+		C206_CaseStudy.addRequest(requestList, r2);
+		
+		C206_CaseStudy.deleteRequest(requestList, r1);
+		assertEquals(1,requestList.size());
+		
+		C206_CaseStudy.deleteRequest(requestList, r2);
+		assertEquals(0,requestList.size());
+		
+		boolean test = (requestList.remove(r1));
 		assertFalse(test);
 		
 	}

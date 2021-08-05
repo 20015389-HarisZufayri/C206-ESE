@@ -82,7 +82,7 @@ public class C206_CaseStudy {
 	}
 
 	// Manage Request Menu by Haris
-	private static void manageRequest() {
+	public static void manageRequest() {
 		// TODO Auto-generated method stub
 		C206_CaseStudy.setHeader("MANAGE REQUEST");
 		System.out.println("1. Add New Request");
@@ -112,7 +112,7 @@ public class C206_CaseStudy {
 	}
 
 	// Manage Delete Requests by Haris
-	private static void deleteRequest(ArrayList<Request> requestList, Request r1) {
+	public static void deleteRequest(ArrayList<Request> requestList, Request r1) {
 		// TODO Auto-generated method stub
 		if (r1 != null && requestList.remove(r1)) {
 			System.out.println("Request successfully deleted");
@@ -123,7 +123,7 @@ public class C206_CaseStudy {
 	}
 
 	// Manage Input Delete Request Requests by Haris
-	private static Request inputDeleteRequest() {
+	public static Request inputDeleteRequest() {
 		// TODO Auto-generated method stub
 		Request r1 = null;
 		if (requestList.size() != 0) {
@@ -142,7 +142,7 @@ public class C206_CaseStudy {
 	}
 
 	// Manage View All Requests by Haris
-	private static void viewAllRequest(ArrayList<Request> requestList) {
+	public static void viewAllRequest(ArrayList<Request> requestList) {
 		// TODO Auto-generated method stub
 		C206_CaseStudy.setHeader("REQUEST LIST");
 		String output = String.format(
@@ -156,7 +156,7 @@ public class C206_CaseStudy {
 	}
 
 // Manage Retrieve Requests by Haris
-	private static String retrieveAllRequest(ArrayList<Request> requestList) {
+	public static String retrieveAllRequest(ArrayList<Request> requestList) {
 		// TODO Auto-generated method stub
 		String output = "";
 
@@ -168,7 +168,7 @@ public class C206_CaseStudy {
 	}
 
 	// Add Request into requestList by Haris
-	private static void addRequest(ArrayList<Request> requestList, Request r1) {
+	public static void addRequest(ArrayList<Request> requestList, Request r1) {
 		// TODO Auto-generated method stub
 
 		if (r1 != null && requestList.add(r1)) {
@@ -178,7 +178,7 @@ public class C206_CaseStudy {
 	}
 
 	// Manage Input Request by Haris
-	private static Request inputRequest() {
+	public static Request inputRequest() {
 		// TODO Auto-generated method stub
 		Request r1 = null;
 
