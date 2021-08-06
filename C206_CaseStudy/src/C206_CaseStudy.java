@@ -271,13 +271,17 @@ public class C206_CaseStudy {
 		if (Choice == 1) {
 			Quote q1 = inputQuote();
 			C206_CaseStudy.addQuote(quoteList, q1);
+			manageQuote();
 		} else if (Choice == 2) {
 			C206_CaseStudy.viewAllQuote(quoteList);
+			manageQuote();
 		} else if (Choice == 3) {
 			Quote q1 = C206_CaseStudy.inputDeleteQuote();
 			C206_CaseStudy.deleteQuote(quoteList, q1);
+			manageQuote();
 		} else if (Choice == 4) {
 			C206_CaseStudy.menu();
+			manageQuote();
 		} else if (Choice > 4 || Choice < 0) {
 			System.out.println("Invalid option");
 			C206_CaseStudy.menu();
@@ -321,7 +325,12 @@ public class C206_CaseStudy {
 
 		String requestid = Helper.readString("Enter Request ID > ");
 		boolean requestidCheck = validInput("Request ID", requestid);
-
+		
+//		while(requestidCheck != true) {
+//			requestid = Helper.readString("Enter Request ID > ");
+//			requestidCheck = validInput("Request ID", requestid) && 
+//		}
+		
 		String quotationid = Helper.readString("Enter Quotation ID > ");
 		boolean quotationidCheck = validInput("Quotation ID", quotationid);
 
