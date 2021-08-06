@@ -579,22 +579,15 @@ public class C206_CaseStudy {
 				roleCheck = validInput("Role", role);
 			}
 
-			if (nameCheck && mobileCheck && emailCheck && roleCheck) {
-				if (role.equals("Customer") || role.equals("Client")) {
-					u1 = new Customer(name, mobile, email, role);
+			if (role.equals("Customer") || role.equals("Client")) {
+				u1 = new Customer(name, mobile, email, role);
 
-				} else if (role.equalsIgnoreCase("Designer")) {
-					u1 = new Designer(name, mobile, email, role);
-
-				}
-			} else {
-				System.out.println("Invalid input");
-
+			} else if (role.equalsIgnoreCase("Designer")) {
+				u1 = new Designer(name, mobile, email, role);
 			}
 		} else {
 			System.out.println("User is already registered");
 		}
-
 		return u1;
 
 	}
@@ -724,15 +717,14 @@ public class C206_CaseStudy {
 				if (a.getCustName().equals(name)) {
 					checkExist = true;
 					return a;
-				}
-				else {
+				} else {
 					checkExist = false;
 				}
 			}
 		} else {
 			System.out.println("There are no appointments");
 		}
-		
+
 		if (checkExist == false) {
 			System.out.println("There are no appointments by this user");
 		}
@@ -761,6 +753,7 @@ public class C206_CaseStudy {
 		}
 		return check;
 	}
+
 	// Valid Designer is registered and if they have existing appointment on same
 	// input date/time
 	public static Appointment checkDesiApp(String name) {
