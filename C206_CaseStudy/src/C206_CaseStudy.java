@@ -964,33 +964,66 @@ public class C206_CaseStudy {
 
 	}
 
-	public static Package inputPackage() {// T
-		// TODO Auto-generated method stub
-		Package p1 = null;
+	  public static Package inputPackage() {// T
+	        // TODO Auto-generated method stub
+	        Package p1 = null;
 
-		String packageid = Helper.readString("Enter Package ID > ");
-		boolean packageidCheck = validInput("Request ID", packageid);
-		System.out.println(packageidCheck);
+	 
 
-		String packageDesc = Helper.readString("Enter Package Description > ");
-		boolean packageDescCheck = validInput("Package Type", packageDesc);
-		System.out.println(packageDescCheck);
+	        String packageid = Helper.readString("Enter Package ID > ");
+	        boolean packageidCheck = validInput("Request ID", packageid);
+	        
+	        if (packageidCheck != true) {
+	            packageid = Helper.readString("Enter Package ID > ");
+	            packageidCheck = validInput("Request ID", packageid);
+	        }
 
-		String packageStart = Helper.readString("Enter Start Date > ");
-		boolean packageStartCheck = validInput("Date", packageStart);
-		System.out.println(packageStartCheck);
+	 
 
-		String packageEnd = Helper.readString("Enter End Date > ");
-		boolean packageEndCheck = validInput("Date", packageEnd);
-		System.out.println(packageEndCheck);
+	        String packageDesc = Helper.readString("Enter Package Description > ");
+	        boolean packageDescCheck = validInput("Package Type", packageDesc);
+	        
+	        if (packageDescCheck != false) {
+	            packageDesc = Helper.readString("Enter Package Description > ");
+	            packageDescCheck = validInput("Package Type", packageDesc);
+	        }
 
-		int amount = Helper.readInt("Enter Total Package Amount > ");
-		boolean amountCheck = validInput("Total Package Amount", String.valueOf(amount));
-		System.out.println(amountCheck);
+	 
 
-		return p1;
+	        String packageStart = Helper.readString("Enter Start Date > ");
+	        boolean packageStartCheck = validInput("Date", packageStart);
+	        
+	        if (packageStartCheck != false) {
+	            packageStart = Helper.readString("Enter Start Date > ");
+	            packageStartCheck = validInput("Date", packageStart);
+	        }
 
-	}
+	 
+
+	        String packageEnd = Helper.readString("Enter End Date > ");
+	        boolean packageEndCheck = validInput("Date", packageEnd);
+	        
+	        if (packageEndCheck!= false) {
+	            packageEnd = Helper.readString("Enter End Date > ");
+	            packageEndCheck = validInput("Date", packageEnd);
+	        }
+
+	 
+
+	        int amount = Helper.readInt("Enter Total Package Amount > ");
+	        boolean amountCheck = validInput("Total Package Amount", String.valueOf(amount));
+	        
+	        if (amountCheck != false) {
+	            amount = Helper.readInt("Enter Total Package Amount > ");
+	            amountCheck = validInput("Total Package Amount", String.valueOf(amount));
+	        }
+	        
+	        p1 = new Package(packageid,packageDesc,packageStart,packageEnd,amount);
+
+	 
+
+	        return p1;
+	    }
 
 	public static void viewAllPackage(ArrayList<Package> packageList) {// T
 		// TODO Auto-generated method stub
