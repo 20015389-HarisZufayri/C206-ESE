@@ -270,6 +270,7 @@ public class C206_CaseStudyTest {
 
 	@Test
 	public void retrieveAllPackageTest() { // T
+		//test
 		assertNotNull(packageList);
 
 		String allPackage = C206_CaseStudy.retrieveAllPackage(packageList);
