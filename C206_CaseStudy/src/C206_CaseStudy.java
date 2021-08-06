@@ -21,7 +21,7 @@ public class C206_CaseStudy {
 		userList.add(new Customer("Shino", "9395-9352", "shino@gmail.com", "Customer"));
 		userList.add(new Designer("Kuro", "9395-9312", "kuroRA@gmail.com", "Designer"));
 
-		userList.add(new Customer("Yolanda", "9395-123", "yolanda@gmail.com", "Customer"));
+		userList.add(new Customer("Yolanda", "9395-1234", "yolanda@gmail.com", "Customer"));
 
 		appList.add(new Appointment("Shino", "06-05-2021", 1500, "Kuro", "River Valley 2510"));
 
