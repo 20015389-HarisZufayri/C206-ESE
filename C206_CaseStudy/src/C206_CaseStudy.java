@@ -643,16 +643,24 @@ public class C206_CaseStudy {
 	// ---<< MANAGE USER: DELETE USER >>---// Done by: Yolanda
 	public static User inputDeleteUser() {
 		User u1 = null;
+		boolean dUser = false;
 		if (userList.size() != 0) {
 			String name = Helper.readString("Enter name > ");
 			for (User u : userList) {
 				if (u.getName().equals(name)) {
 					u1 = u;
-
+					dUser = true;
+				}
+				else {
+					dUser = false;
 				}
 			}
 		} else {
 			System.out.println("There are no users");
+		}
+		
+		if (dUser == false) {
+			System.out.println("User is not registered user");
 		}
 		return u1;
 	}
@@ -660,8 +668,6 @@ public class C206_CaseStudy {
 	public static void deleteUser(ArrayList<User> userList, User u1) {
 		if (u1 != null && userList.remove(u1)) {
 			System.out.println("User successfully deleted");
-		} else {
-			System.out.println("Invalid user for deletion");
 		}
 	}
 
@@ -772,6 +778,7 @@ public class C206_CaseStudy {
 		boolean checkAddress = validInput("Address", address);
 
 		while (checkAddress != true) {
+			System.out.println("Invalid address");
 			address = Helper.readString("Enter address > ");
 			checkAddress = validInput("Address", address);
 		}
@@ -780,6 +787,7 @@ public class C206_CaseStudy {
 		boolean checkDate = validInput("Date", date) && chkCurDate(date);
 
 		while (checkDate != true) {
+			System.out.println("Invalid date");
 			date = Helper.readString("Enter date [dd-mm-yyyy] > ");
 			checkDate = validInput("Date", date) && chkCurDate(date);
 		}
@@ -788,6 +796,7 @@ public class C206_CaseStudy {
 		boolean checkTime = validInput("Time", time);
 
 		while (checkTime != true) {
+			System.out.println("Invalid time");
 			time = Helper.readString("Enter time [0000] > ");
 			checkTime = validInput("Time", time);
 		}
@@ -809,6 +818,7 @@ public class C206_CaseStudy {
 								date = Helper.readString("Enter date [dd-mm-yyyy] > ");
 								checkDate = validInput("Date", date) && chkCurDate(date);
 								while (checkDate != true) {
+									System.out.println("Invalid date");
 									date = Helper.readString("Enter date [dd-mm-yyyy] > ");
 									checkDate = validInput("Date", date) && chkCurDate(date);
 								}
@@ -817,6 +827,7 @@ public class C206_CaseStudy {
 								checkTime = validInput("Time", time);
 
 								while (checkTime != true) {
+									System.out.println("Invalid time");
 									time = Helper.readString("Enter time [0000] > ");
 									checkTime = validInput("Time", time);
 								}
