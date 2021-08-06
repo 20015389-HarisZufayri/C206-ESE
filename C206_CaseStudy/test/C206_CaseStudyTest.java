@@ -71,9 +71,12 @@ public class C206_CaseStudyTest {
 		c2 = null;
 		d1 = null;
 		d2 = null;
+		r1=null;
+		r2=null;
 		userList = null;
 		appList = null;
 		quoteList = null;
+		requestList=null;
 	}
 
 	@Test
