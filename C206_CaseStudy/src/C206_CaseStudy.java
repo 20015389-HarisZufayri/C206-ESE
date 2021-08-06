@@ -387,28 +387,65 @@ public class C206_CaseStudy {
 		String requestid = Helper.readString("Enter Request ID > ");
 		boolean requestidCheck = validInput("Request ID", requestid);
 		
-//		while(requestidCheck != true) {
-//			requestid = Helper.readString("Enter Request ID > ");
-//			requestidCheck = validInput("Request ID", requestid) && 
-//		}
+		while(requestidCheck != true) {
+		System.out.println("Please enter valid input.");
+		requestid = Helper.readString("Enter Request ID > ");
+		requestidCheck = validInput("Request ID", requestid); 
+		}
 		
 		String quotationid = Helper.readString("Enter Quotation ID > ");
 		boolean quotationidCheck = validInput("Quotation ID", quotationid);
+		
+		while (quotationidCheck != true) {
+			System.out.println("Please enter valid input.");
+			quotationid = Helper.readString("Enter Quotation ID > ");
+			quotationidCheck = validInput("Quotation ID", quotationid);
+		}
 
 		String renoC = Helper.readString("Enter Reno Category [Bedroom|Kitchen|Living Room] > ");
 		boolean renoCheck = validInput("Reno Cat", renoC);
+		
+		while (renoCheck != true) {
+			System.out.println("Please enter valid input.");
+			renoC = Helper.readString("Enter Reno Category [Bedroom|Kitchen|Living Room] > ");
+			renoCheck = validInput("Reno Cat", renoC);
+		}
 
 		String renoD = Helper.readString("Enter Reno Description > ");
 		boolean renoDCheck = validInput("Reno Des", renoD);
+		
+		while (renoDCheck != true) {
+			System.out.println("Please enter valid input.");
+			renoD = Helper.readString("Enter Reno Description > ");
+			renoDCheck = validInput("Reno Des", renoD);
+		}
 
 		String desName = Helper.readString("Enter Name > ");
 		boolean desNameCheck = validInput("Name", desName);
+		
+		while (desNameCheck != true) {
+			System.out.println("Please enter valid input.");
+			desName = Helper.readString("Enter Name > ");
+			desNameCheck = validInput("Name", desName);
+		}
 
 		String earDate = Helper.readString("Enter Date [yyyy-MM-dd] > ");
 		boolean earDateCheck = validInput("Date", earDate);
+		
+		while (earDateCheck != true) {
+			System.out.println("Please enter valid input.");
+			earDate = Helper.readString("Enter Date [yyyy-MM-dd] > ");
+			earDateCheck = validInput("Date", earDate);
+		}
 
 		String tAmount = Helper.readString("Enter Total Quotation Amount [0000.00] > ");
 		boolean tAmountCheck = validInput("Total Quotation Amount", tAmount);
+		
+		while (tAmountCheck != true) {
+			System.out.println("Enter valid input.");
+			tAmount = Helper.readString("Enter Total Quotation Amount [0000.00] > ");
+			tAmountCheck = validInput("Total Quotation Amount", tAmount);
+		}
 
 		if (requestidCheck && quotationidCheck && renoCheck && renoDCheck && desNameCheck && earDateCheck
 				&& tAmountCheck) {
@@ -944,7 +981,7 @@ public class C206_CaseStudy {
 		if (packageList.size() != 0) {
 			String packageid = Helper.readString("Enter Package ID > ");
 			for (Package p : packageList) {
-				if (p.getPackagecode().equals(packageid)) {
+				if (p.getPackagecode() == (packageid)) {
 					p1 = p;
 
 				}
