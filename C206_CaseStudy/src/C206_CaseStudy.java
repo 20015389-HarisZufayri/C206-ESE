@@ -1041,7 +1041,7 @@ public class C206_CaseStudy {
 	        String packageDesc = Helper.readString("Enter Package Description > ");
 	        boolean packageDescCheck = validInput("Package Type", packageDesc);
 	        
-	        if (packageDescCheck != false) {
+	        if (packageDescCheck != true) {
 	            packageDesc = Helper.readString("Enter Package Description > ");
 	            packageDescCheck = validInput("Package Type", packageDesc);
 	        }
@@ -1051,7 +1051,7 @@ public class C206_CaseStudy {
 	        String packageStart = Helper.readString("Enter Start Date > ");
 	        boolean packageStartCheck = validInput("Date", packageStart);
 	        
-	        if (packageStartCheck != false) {
+	        if (packageStartCheck != true) {
 	            packageStart = Helper.readString("Enter Start Date > ");
 	            packageStartCheck = validInput("Date", packageStart);
 	        }
@@ -1061,7 +1061,7 @@ public class C206_CaseStudy {
 	        String packageEnd = Helper.readString("Enter End Date > ");
 	        boolean packageEndCheck = validInput("Date", packageEnd);
 	        
-	        if (packageEndCheck!= false) {
+	        if (packageEndCheck!= true) {
 	            packageEnd = Helper.readString("Enter End Date > ");
 	            packageEndCheck = validInput("Date", packageEnd);
 	        }
@@ -1071,7 +1071,7 @@ public class C206_CaseStudy {
 	        int amount = Helper.readInt("Enter Total Package Amount > ");
 	        boolean amountCheck = validInput("Total Package Amount", String.valueOf(amount));
 	        
-	        if (amountCheck != false) {
+	        if (amountCheck != true) {
 	            amount = Helper.readInt("Enter Total Package Amount > ");
 	            amountCheck = validInput("Total Package Amount", String.valueOf(amount));
 	        }
