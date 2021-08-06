@@ -21,7 +21,7 @@ public class C206_CaseStudy {
 		userList.add(new Customer("Shino", "9395-9352", "shino@gmail.com", "Customer"));
 		userList.add(new Designer("Kuro", "9395-9312", "kuroRA@gmail.com", "Designer"));
 
-		userList.add(new Customer("Yolanda", "9395-123", "yolanda@gmail.com", "Customer"));
+		userList.add(new Customer("Yolanda", "9395-1234", "yolanda@gmail.com", "Customer"));
 
 		appList.add(new Appointment("Shino", "06-05-2021", 1500, "Kuro", "River Valley 2510"));
 
@@ -103,9 +103,6 @@ public class C206_CaseStudy {
 		} else if (Choice == 3) {
 			Request r1 = C206_CaseStudy.inputDeleteRequest();
 			C206_CaseStudy.deleteRequest(requestList, r1);
-			manageRequest();
-		} else if (Choice == 4) {
-			C206_CaseStudy.menu();
 			manageRequest();
 		} else if (Choice > 4 || Choice < 0) {
 			System.out.println("Invalid option");
@@ -340,9 +337,6 @@ public class C206_CaseStudy {
 			Quote q1 = C206_CaseStudy.inputDeleteQuote();
 			C206_CaseStudy.deleteQuote(quoteList, q1);
 			manageQuote();
-		} else if (Choice == 4) {
-			C206_CaseStudy.menu();
-			manageQuote();
 		} else if (Choice > 4 || Choice < 0) {
 			System.out.println("Invalid option");
 			C206_CaseStudy.menu();
@@ -387,28 +381,65 @@ public class C206_CaseStudy {
 		String requestid = Helper.readString("Enter Request ID > ");
 		boolean requestidCheck = validInput("Request ID", requestid);
 		
-//		while(requestidCheck != true) {
-//			requestid = Helper.readString("Enter Request ID > ");
-//			requestidCheck = validInput("Request ID", requestid) && 
-//		}
+		while(requestidCheck != true) {
+		System.out.println("Please enter valid input.");
+		requestid = Helper.readString("Enter Request ID > ");
+		requestidCheck = validInput("Request ID", requestid); 
+		}
 		
 		String quotationid = Helper.readString("Enter Quotation ID > ");
 		boolean quotationidCheck = validInput("Quotation ID", quotationid);
+		
+		while (quotationidCheck != true) {
+			System.out.println("Please enter valid input.");
+			quotationid = Helper.readString("Enter Quotation ID > ");
+			quotationidCheck = validInput("Quotation ID", quotationid);
+		}
 
 		String renoC = Helper.readString("Enter Reno Category [Bedroom|Kitchen|Living Room] > ");
 		boolean renoCheck = validInput("Reno Cat", renoC);
+		
+		while (renoCheck != true) {
+			System.out.println("Please enter valid input.");
+			renoC = Helper.readString("Enter Reno Category [Bedroom|Kitchen|Living Room] > ");
+			renoCheck = validInput("Reno Cat", renoC);
+		}
 
 		String renoD = Helper.readString("Enter Reno Description > ");
 		boolean renoDCheck = validInput("Reno Des", renoD);
+		
+		while (renoDCheck != true) {
+			System.out.println("Please enter valid input.");
+			renoD = Helper.readString("Enter Reno Description > ");
+			renoDCheck = validInput("Reno Des", renoD);
+		}
 
 		String desName = Helper.readString("Enter Name > ");
 		boolean desNameCheck = validInput("Name", desName);
+		
+		while (desNameCheck != true) {
+			System.out.println("Please enter valid input.");
+			desName = Helper.readString("Enter Name > ");
+			desNameCheck = validInput("Name", desName);
+		}
 
 		String earDate = Helper.readString("Enter Date [yyyy-MM-dd] > ");
 		boolean earDateCheck = validInput("Date", earDate);
+		
+		while (earDateCheck != true) {
+			System.out.println("Please enter valid input.");
+			earDate = Helper.readString("Enter Date [yyyy-MM-dd] > ");
+			earDateCheck = validInput("Date", earDate);
+		}
 
 		String tAmount = Helper.readString("Enter Total Quotation Amount [0000.00] > ");
 		boolean tAmountCheck = validInput("Total Quotation Amount", tAmount);
+		
+		while (tAmountCheck != true) {
+			System.out.println("Enter valid input.");
+			tAmount = Helper.readString("Enter Total Quotation Amount [0000.00] > ");
+			tAmountCheck = validInput("Total Quotation Amount", tAmount);
+		}
 
 		if (requestidCheck && quotationidCheck && renoCheck && renoDCheck && desNameCheck && earDateCheck
 				&& tAmountCheck) {
@@ -458,15 +489,16 @@ public class C206_CaseStudy {
 		if (Choice == 1) {
 			User u1 = inputUser();
 			C206_CaseStudy.addUser(userList, u1);
+			manageUser();
 		} else if (Choice == 2) {
 			C206_CaseStudy.viewAllCustomer(userList);
 			C206_CaseStudy.viewAllDesigner(userList);
+			manageUser();
 		} else if (Choice == 3) {
 			User u1 = C206_CaseStudy.inputDeleteUser();
 			C206_CaseStudy.deleteUser(userList, u1);
-		} else if (Choice == 4) {
-			C206_CaseStudy.menu();
-		} else if (Choice > 4 || Choice < 0) {
+			manageUser();
+		}  else if (Choice > 4 || Choice < 0) {
 			System.out.println("Invalid option");
 			C206_CaseStudy.menu();
 
@@ -487,15 +519,16 @@ public class C206_CaseStudy {
 		if (cApp == 1) {
 			Appointment a1 = inputApp();
 			C206_CaseStudy.addApp(appList, a1);
+			manageApp();
 		} else if (cApp == 2) {
 			C206_CaseStudy.viewAllAppointment(appList);
+			manageApp();
 
 		} else if (cApp == 3) {
 			Appointment a1 = C206_CaseStudy.inputDeleteApp();
 			C206_CaseStudy.deleteApp(appList, a1);
-		} else if (cApp == 4) {
-			C206_CaseStudy.menu();
-		} else if (cApp > 4 || cApp < 0) {
+			manageApp();
+		}else if (cApp > 4 || cApp < 0) {
 			System.out.println("Invalid option");
 			C206_CaseStudy.menu();
 
@@ -507,20 +540,44 @@ public class C206_CaseStudy {
 	public static User inputUser() {
 		User u1 = null;
 
-		String name = Helper.readString("Enter name > ");
+		String name = Helper.readString("Enter name > ").trim();
 
 		if (checkCustomer(name) == false) {
 
 			boolean nameCheck = validInput("Name", name);
-
+			
+			while (nameCheck != true) {
+				System.out.println("Invalid Name");
+				name = Helper.readString("Enter name > ");
+				nameCheck = validInput("Name", name);
+			}
+			
 			String mobile = Helper.readString("Enter mobile [0000-0000] > ");
 			boolean mobileCheck = validInput("Mobile", mobile);
+			
+			while (mobileCheck != true) {
+				System.out.println("Invalid Mobile");
+				mobile = Helper.readString("Enter mobile [0000-0000] > ");
+				mobileCheck = validInput("Mobile", mobile);
+			}
 
 			String email = Helper.readString("Enter email > ");
 			boolean emailCheck = validInput("Email", email);
+			
+			while (emailCheck != true) {
+				System.out.println("Invalid Email");
+				email = Helper.readString("Enter email > ");
+				emailCheck = validInput("Email", email);
+			}
 
 			String role = Helper.readString("Enter role [Customer|Designer] > ");
 			boolean roleCheck = validInput("Role", role);
+			
+			while (roleCheck != true) {
+				System.out.println("Invalid Role");
+				role = Helper.readString("Enter role [Customer|Designer] > ");
+				roleCheck = validInput("Role", role);
+			}
 
 			if (nameCheck && mobileCheck && emailCheck && roleCheck) {
 				if (role.equals("Customer") || role.equals("Client")) {
@@ -929,9 +986,7 @@ public class C206_CaseStudy {
 		} else if (Choice == 3) {
 			Package p1 = C206_CaseStudy.inputDeletePackage();
 			C206_CaseStudy.deletePackage(packageList, p1);
-		} else if (Choice == 4) {
-			C206_CaseStudy.menu();
-		} else if (Choice > 4 || Choice < 0) {
+		}else if (Choice > 4 || Choice < 0) {
 			System.out.println("Invalid option");
 			C206_CaseStudy.menu();
 
@@ -944,7 +999,7 @@ public class C206_CaseStudy {
 		if (packageList.size() != 0) {
 			String packageid = Helper.readString("Enter Package ID > ");
 			for (Package p : packageList) {
-				if (p.getPackagecode().equals(packageid)) {
+				if (p.getPackagecode() == (packageid)) {
 					p1 = p;
 
 				}
@@ -1055,5 +1110,4 @@ public class C206_CaseStudy {
 		}
 
 	}
-
 }
