@@ -281,8 +281,8 @@ public class C206_CaseStudyTest {
 		assertEquals(2, packageList.size());
 
 		allPackage = C206_CaseStudy.retrieveAllPackage(packageList);
-		testOutput = String.format("%-10s %-10s %-10s %-10s %-10d\n", "K100", "Fragile", "14-8-2021", "16-8-2021", 3);
-		testOutput += String.format("%-10s %-10s %-10s %-10s %-10d\n", "I200", "Sturdy", "21-8-2021", "25-8-2021", 8);
+		testOutput = String.format("%-10s %-30s %-10s %-10s %-10d\n", "K100", "Fragile", "14-8-2021", "16-8-2021", 3);
+		testOutput += String.format("%-10s %-30s %-10s %-10s %-10d\n", "I200", "Sturdy", "21-8-2021", "25-8-2021", 8);
 
 		assertEquals(testOutput, allPackage);
 
