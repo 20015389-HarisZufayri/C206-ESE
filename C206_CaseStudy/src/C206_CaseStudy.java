@@ -677,16 +677,11 @@ public class C206_CaseStudy {
 		Appointment a1 = null;
 		boolean exist = false;
 		String name = Helper.readString("Enter Name > ");
-
 		for (Appointment a : appList) {
-
 			if (a.getCustName().equals(name)) {
-
 				System.out.println("User have existing appointment");
 				exist = true;
-
 			} else {
-
 				exist = false;
 			}
 		}
@@ -722,20 +717,24 @@ public class C206_CaseStudy {
 
 	// ---<< MANAGE APPOINTMENT: DELETE APPOINTMENT >>---// Done by: Yolanda
 	public static Appointment inputDeleteApp() {
-
+		boolean checkExist = false;
 		if (appList.size() != 0) {
 			String name = Helper.readString("Enter name > ");
-			if (checkCustomer(name)) {
-				for (Appointment a : appList) {
-					if (a.getCustName().equals(name)) {
-						return a;
-					}
+			for (Appointment a : appList) {
+				if (a.getCustName().equals(name)) {
+					checkExist = true;
+					return a;
 				}
-			} else {
-				System.out.println("User is not registered");
+				else {
+					checkExist = false;
+				}
 			}
 		} else {
 			System.out.println("There are no appointments");
+		}
+		
+		if (checkExist == false) {
+			System.out.println("There are no appointments by this user");
 		}
 		return null;
 	}
@@ -762,23 +761,6 @@ public class C206_CaseStudy {
 		}
 		return check;
 	}
-
-	private static boolean checkDesigner(String user) {
-		boolean check = false;
-		for (User u : userList) {
-			if (u instanceof Designer) {
-				Designer d = (Designer) u;
-				if (d.getName().equals(user)) {
-					check = true;
-					break;
-				} else {
-					check = false;
-				}
-			}
-		}
-		return check;
-	}
-
 	// Valid Designer is registered and if they have existing appointment on same
 	// input date/time
 	public static Appointment checkDesiApp(String name) {
