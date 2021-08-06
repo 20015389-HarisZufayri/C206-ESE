@@ -104,9 +104,6 @@ public class C206_CaseStudy {
 			Request r1 = C206_CaseStudy.inputDeleteRequest();
 			C206_CaseStudy.deleteRequest(requestList, r1);
 			manageRequest();
-		} else if (Choice == 4) {
-			C206_CaseStudy.menu();
-			manageRequest();
 		} else if (Choice > 4 || Choice < 0) {
 			System.out.println("Invalid option");
 			C206_CaseStudy.menu();
@@ -340,9 +337,6 @@ public class C206_CaseStudy {
 			Quote q1 = C206_CaseStudy.inputDeleteQuote();
 			C206_CaseStudy.deleteQuote(quoteList, q1);
 			manageQuote();
-		} else if (Choice == 4) {
-			C206_CaseStudy.menu();
-			manageQuote();
 		} else if (Choice > 4 || Choice < 0) {
 			System.out.println("Invalid option");
 			C206_CaseStudy.menu();
@@ -495,15 +489,16 @@ public class C206_CaseStudy {
 		if (Choice == 1) {
 			User u1 = inputUser();
 			C206_CaseStudy.addUser(userList, u1);
+			manageUser();
 		} else if (Choice == 2) {
 			C206_CaseStudy.viewAllCustomer(userList);
 			C206_CaseStudy.viewAllDesigner(userList);
+			manageUser();
 		} else if (Choice == 3) {
 			User u1 = C206_CaseStudy.inputDeleteUser();
 			C206_CaseStudy.deleteUser(userList, u1);
-		} else if (Choice == 4) {
-			C206_CaseStudy.menu();
-		} else if (Choice > 4 || Choice < 0) {
+			manageUser();
+		}  else if (Choice > 4 || Choice < 0) {
 			System.out.println("Invalid option");
 			C206_CaseStudy.menu();
 
@@ -524,15 +519,16 @@ public class C206_CaseStudy {
 		if (cApp == 1) {
 			Appointment a1 = inputApp();
 			C206_CaseStudy.addApp(appList, a1);
+			manageApp();
 		} else if (cApp == 2) {
 			C206_CaseStudy.viewAllAppointment(appList);
+			manageApp();
 
 		} else if (cApp == 3) {
 			Appointment a1 = C206_CaseStudy.inputDeleteApp();
 			C206_CaseStudy.deleteApp(appList, a1);
-		} else if (cApp == 4) {
-			C206_CaseStudy.menu();
-		} else if (cApp > 4 || cApp < 0) {
+			manageApp();
+		}else if (cApp > 4 || cApp < 0) {
 			System.out.println("Invalid option");
 			C206_CaseStudy.menu();
 
@@ -544,20 +540,44 @@ public class C206_CaseStudy {
 	public static User inputUser() {
 		User u1 = null;
 
-		String name = Helper.readString("Enter name > ");
+		String name = Helper.readString("Enter name > ").trim();
 
 		if (checkCustomer(name) == false) {
 
 			boolean nameCheck = validInput("Name", name);
-
+			
+			while (nameCheck != true) {
+				System.out.println("Invalid Name");
+				name = Helper.readString("Enter name > ");
+				nameCheck = validInput("Name", name);
+			}
+			
 			String mobile = Helper.readString("Enter mobile [0000-0000] > ");
 			boolean mobileCheck = validInput("Mobile", mobile);
+			
+			while (mobileCheck != true) {
+				System.out.println("Invalid Mobile");
+				mobile = Helper.readString("Enter mobile [0000-0000] > ");
+				mobileCheck = validInput("Mobile", mobile);
+			}
 
 			String email = Helper.readString("Enter email > ");
 			boolean emailCheck = validInput("Email", email);
+			
+			while (emailCheck != true) {
+				System.out.println("Invalid Email");
+				email = Helper.readString("Enter email > ");
+				emailCheck = validInput("Email", email);
+			}
 
 			String role = Helper.readString("Enter role [Customer|Designer] > ");
 			boolean roleCheck = validInput("Role", role);
+			
+			while (roleCheck != true) {
+				System.out.println("Invalid Role");
+				role = Helper.readString("Enter role [Customer|Designer] > ");
+				roleCheck = validInput("Role", role);
+			}
 
 			if (nameCheck && mobileCheck && emailCheck && roleCheck) {
 				if (role.equals("Customer") || role.equals("Client")) {
@@ -966,9 +986,7 @@ public class C206_CaseStudy {
 		} else if (Choice == 3) {
 			Package p1 = C206_CaseStudy.inputDeletePackage();
 			C206_CaseStudy.deletePackage(packageList, p1);
-		} else if (Choice == 4) {
-			C206_CaseStudy.menu();
-		} else if (Choice > 4 || Choice < 0) {
+		}else if (Choice > 4 || Choice < 0) {
 			System.out.println("Invalid option");
 			C206_CaseStudy.menu();
 
