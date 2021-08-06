@@ -96,13 +96,17 @@ public class C206_CaseStudy {
 		if (Choice == 1) {
 			Request r1 = inputRequest();
 			C206_CaseStudy.addRequest(requestList, r1);
+			manageRequest();
 		} else if (Choice == 2) {
 			C206_CaseStudy.viewAllRequest(requestList);
+			manageRequest();
 		} else if (Choice == 3) {
 			Request r1 = C206_CaseStudy.inputDeleteRequest();
 			C206_CaseStudy.deleteRequest(requestList, r1);
+			manageRequest();
 		} else if (Choice == 4) {
 			C206_CaseStudy.menu();
+			manageRequest();
 		} else if (Choice > 4 || Choice < 0) {
 			System.out.println("Invalid option");
 			C206_CaseStudy.menu();
@@ -178,84 +182,141 @@ public class C206_CaseStudy {
 	}
 
 	// Manage Input Request by Haris
-	public static Request inputRequest() {
-		// TODO Auto-generated method stub
-		Request r1 = null;
+		public static Request inputRequest() {
+			// TODO Auto-generated method stub
+			Request r1 = null;
 
-		int requestid = Helper.readInt("Enter Request ID > ");
-		boolean requestidCheck = validInput("Request ID", String.valueOf(requestid));
-		System.out.println(requestidCheck);
+			int requestid = Helper.readInt("Enter Request ID > ");
+			boolean requestidCheck = validInput("Request ID", String.valueOf(requestid));
+			while (requestidCheck != true) {
+				requestid = Helper.readInt("Enter Request ID > ");
+				requestidCheck = validInput("Request ID", String.valueOf(requestid));
+			}
+			// System.out.println(requestidCheck);
 
-		String propertyType = Helper.readString("Enter Property Type [HDB|Private|Landed] > ");
-		boolean propertyTypeCheck = validInput("Property Type", propertyType);
-		System.out.println(propertyTypeCheck);
+			String propertyType = Helper.readString("Enter Property Type [HDB|Private|Landed] > ");
+			boolean propertyTypeCheck = validInput("Property Type", propertyType);
+			while (propertyTypeCheck != true) {
+				propertyType = Helper.readString("Enter Property Type [HDB|Private|Landed] > ");
+				propertyTypeCheck = validInput("Property Type", propertyType);
+			}
 
-		int areaSize = Helper.readInt("Enter Area Size > ");
-		boolean areaSizeCheck = validInput("Area Size", String.valueOf(areaSize));
-		System.out.println(areaSizeCheck);
+			// System.out.println(propertyTypeCheck);
 
-		String requestName = Helper.readString("Enter Request Name > ");
-		boolean requestNameCheck = validInput("Name", requestName);
-		System.out.println(requestNameCheck);
+			int areaSize = Helper.readInt("Enter Area Size > ");
+			boolean areaSizeCheck = validInput("Area Size", String.valueOf(areaSize));
+			while (areaSizeCheck != true) {
+				areaSize = Helper.readInt("Enter Area Size > ");
+				areaSizeCheck = validInput("Area Size", String.valueOf(areaSize));
+			}
+			// System.out.println(areaSizeCheck);
 
-		String CNumber = Helper.readString("Enter Contact Number > ");
-		boolean CNumberCheck = validInput("Mobile", CNumber);
-		System.out.println(CNumberCheck);
+			String requestName = Helper.readString("Enter Request Name > ");
+			boolean requestNameCheck = validInput("Name", requestName);
+			while (requestNameCheck != true) {
+				requestName = Helper.readString("Enter Request Name > ");
+				requestNameCheck = validInput("Name", requestName);
+			}
+			// System.out.println(requestNameCheck);
 
-		String email = Helper.readString("Enter Email > ");
-		boolean emailCheck = validInput("Email", email);
-		System.out.println(emailCheck);
+			String CNumber = Helper.readString("Enter Contact Number > ");
+			boolean CNumberCheck = validInput("Mobile", CNumber);
+			while (CNumberCheck != true) {
+				CNumber = Helper.readString("Enter Contact Number > ");
+				CNumberCheck = validInput("Mobile", CNumber);
+			}
+			// System.out.println(CNumberCheck);
 
-		String budget = Helper.readString("Enter Total Budget Amount > ");
-		boolean budgetCheck = validInput("Total Quotation Amount", budget);
-		System.out.println(budgetCheck);
+			String email = Helper.readString("Enter Email > ");
+			boolean emailCheck = validInput("Email", email);
+			while (emailCheck != true) {
+				email = Helper.readString("Enter Email > ");
+				emailCheck = validInput("Email", email);
+			}
+			// System.out.println(emailCheck);
 
-		String tgtCompletionDate = Helper.readString("Enter Completion Date DD-MM-YYYY > ");
-		boolean tgtCompletionDateCheck = validInput("Date", tgtCompletionDate);
-		System.out.println(tgtCompletionDateCheck);
+			String budget = Helper.readString("Enter Total Budget Amount > ");
+			boolean budgetCheck = validInput("Total Quotation Amount", budget);
+			while (budgetCheck != true) {
+				budget = Helper.readString("Enter Total Budget Amount > ");
+				budgetCheck = validInput("Total Quotation Amount", budget);
+			}
+			// System.out.println(budgetCheck);
 
-		String renovationType = Helper.readString("Enter Renovation Type [Whole House|Room|Kitchen|Toilet] > ");
-		boolean renovationTypeCheck = validInput("Renovation Type", renovationType);
-		System.out.println(renovationTypeCheck);
+			String tgtCompletionDate = Helper.readString("Enter Completion Date DD-MM-YYYY > ");
+			boolean tgtCompletionDateCheck = validInput("Date", tgtCompletionDate);
+			while (tgtCompletionDateCheck != true) {
+				tgtCompletionDate = Helper.readString("Enter Completion Date DD-MM-YYYY > ");
+				tgtCompletionDateCheck = validInput("Date", tgtCompletionDate);
+			}
+			// System.out.println(tgtCompletionDateCheck);
 
-		int noOfRooms = Helper.readInt("Enter number of rooms: ");
-		boolean noOfRoomsCheck = validInput("Number of Items", String.valueOf(noOfRooms));
-		System.out.println(noOfRoomsCheck);
+			String renovationType = Helper.readString("Enter Renovation Type [Whole House|Room|Kitchen|Toilet] > ");
+			boolean renovationTypeCheck = validInput("Renovation Type", renovationType);
+			while (renovationTypeCheck != true) {
+				renovationType = Helper.readString("Enter Renovation Type [Whole House|Room|Kitchen|Toilet] > ");
+				renovationTypeCheck = validInput("Renovation Type", renovationType);
+			}
+			// System.out.println(renovationTypeCheck);
 
-		int noOfToilets = Helper.readInt("Enter number of toilets: ");
-		boolean noOfToiletsCheck = validInput("Number of Items", String.valueOf(noOfToilets));
-		System.out.println(noOfToiletsCheck);
+			int noOfRooms = Helper.readInt("Enter number of rooms: ");
+			boolean noOfRoomsCheck = validInput("Number of Items", String.valueOf(noOfRooms));
+			while (noOfRoomsCheck != true) {
+				noOfRooms = Helper.readInt("Enter number of rooms: ");
+				noOfRoomsCheck = validInput("Number of Items", String.valueOf(noOfRooms));
+			}
+			// System.out.println(noOfRoomsCheck);
 
-		String renoStyle = Helper.readString("Enter renovation style: ");
-		boolean renoStyleCheck = validInput("Name", renoStyle);
-		System.out.println(renoStyleCheck);
+			int noOfToilets = Helper.readInt("Enter number of toilets: ");
+			boolean noOfToiletsCheck = validInput("Number of Items", String.valueOf(noOfToilets));
+			while (noOfToiletsCheck != true) {
+				noOfToilets = Helper.readInt("Enter number of toilets: ");
+				noOfToiletsCheck = validInput("Number of Items", String.valueOf(noOfToilets));
+			}
+			// System.out.println(noOfToiletsCheck);
 
-		String status = Helper.readString("Urgent ? :");
-		boolean statusCheck = validInput("Status", status);
-		System.out.println(statusCheck);
+			String renoStyle = Helper.readString("Enter renovation style: ");
+			boolean renoStyleCheck = validInput("Name", renoStyle);
+			while (tgtCompletionDateCheck != true) {
+				tgtCompletionDate = Helper.readString("Enter Completion Date DD-MM-YYYY > ");
+				tgtCompletionDateCheck = validInput("Date", tgtCompletionDate);
+			}
+			// System.out.println(renoStyleCheck);
 
-		String requestDate = Helper.readString("Enter Request Date: ");
-		boolean requestDateCheck = validInput("Date", requestDate);
-		System.out.println(requestDateCheck);
+			String status = Helper.readString("Urgent ? :");
+			boolean statusCheck = validInput("Status", status);
+			while (statusCheck != true) {
+				status = Helper.readString("Urgent ? :");
+				statusCheck = validInput("Status", status);
+			}
+			// System.out.println(statusCheck);
 
-		// with renoStyle
-		if (requestidCheck && propertyTypeCheck && areaSizeCheck && requestNameCheck && CNumberCheck && emailCheck
-				&& budgetCheck && tgtCompletionDateCheck && renovationTypeCheck && noOfRoomsCheck && noOfToiletsCheck
-				&& renoStyleCheck && statusCheck && requestDateCheck) {
-			r1 = new Request(requestid, propertyType, areaSize, requestName, CNumber, email, budget, tgtCompletionDate,
-					renovationType, noOfRooms, noOfToilets, renoStyle, status, requestDate);
-			// without renoStyle
-		} else if (requestidCheck && propertyTypeCheck && areaSizeCheck && requestNameCheck && CNumberCheck
-				&& emailCheck && budgetCheck && tgtCompletionDateCheck && renovationTypeCheck && noOfRoomsCheck
-				&& noOfToiletsCheck && statusCheck && requestDateCheck) {
-			r1 = new Request(requestid, propertyType, areaSize, requestName, CNumber, email, budget, tgtCompletionDate,
-					renovationType, noOfRooms, noOfToilets, status, requestDate);
-		} else {
-			System.out.println("Invalid Input");
+			String requestDate = Helper.readString("Enter Request Date: ");
+			boolean requestDateCheck = validInput("Date", requestDate);
+			while (requestDateCheck != true) {
+				requestDate = Helper.readString("Enter Request Date: ");
+				requestDateCheck = validInput("Date", requestDate);
+			}
+			// System.out.println(requestDateCheck);
+
+			// with renoStyle
+			if (requestidCheck && propertyTypeCheck && areaSizeCheck && requestNameCheck && CNumberCheck && emailCheck
+					&& budgetCheck && tgtCompletionDateCheck && renovationTypeCheck && noOfRoomsCheck && noOfToiletsCheck
+					&& renoStyleCheck && statusCheck && requestDateCheck) {
+				r1 = new Request(requestid, propertyType, areaSize, requestName, CNumber, email, budget, tgtCompletionDate,
+						renovationType, noOfRooms, noOfToilets, renoStyle, status, requestDate);
+				// without renoStyle
+			} else if (requestidCheck && propertyTypeCheck && areaSizeCheck && requestNameCheck && CNumberCheck
+					&& emailCheck && budgetCheck && tgtCompletionDateCheck && renovationTypeCheck && noOfRoomsCheck
+					&& noOfToiletsCheck && statusCheck && requestDateCheck) {
+				r1 = new Request(requestid, propertyType, areaSize, requestName, CNumber, email, budget, tgtCompletionDate,
+						renovationType, noOfRooms, noOfToilets, status, requestDate);
+			} else {
+				System.out.println("Invalid Input");
+			}
+			return r1;
+
 		}
-		return r1;
-
-	}
 
 	// Manage quote menu by RX
 	public static void manageQuote() {
