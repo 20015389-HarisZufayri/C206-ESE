@@ -981,11 +981,14 @@ public class C206_CaseStudy {
 		if (Choice == 1) {
 			Package p1 = inputPackage();
 			C206_CaseStudy.addPackage(packageList, p1);
+			managePackage();
 		} else if (Choice == 2) {
 			C206_CaseStudy.viewAllPackage(packageList);
+			managePackage();
 		} else if (Choice == 3) {
 			Package p1 = C206_CaseStudy.inputDeletePackage();
 			C206_CaseStudy.deletePackage(packageList, p1);
+			managePackage();
 		}else if (Choice > 4 || Choice < 0) {
 			System.out.println("Invalid option");
 			C206_CaseStudy.menu();
@@ -993,7 +996,7 @@ public class C206_CaseStudy {
 		}
 
 	}
-
+	
 	public static Package inputDeletePackage() { // T
 		Package p1 = null;
 		if (packageList.size() != 0) {
@@ -1075,7 +1078,6 @@ public class C206_CaseStudy {
 	        
 	        p1 = new Package(packageid,packageDesc,packageStart,packageEnd,amount);
 
-	 
 
 	        return p1;
 	    }
