@@ -423,7 +423,7 @@ public class C206_CaseStudy {
 			desNameCheck = validInput("Name", desName);
 		}
 
-		String earDate = Helper.readString("Enter Date [yyyy-MM-dd] > ");
+		String earDate = Helper.readString("Enter Date [dd-MM-yyyy] > ");
 		boolean earDateCheck = validInput("Date", earDate);
 
 		while (earDateCheck != true) {
