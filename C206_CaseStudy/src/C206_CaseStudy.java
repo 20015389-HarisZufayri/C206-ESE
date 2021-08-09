@@ -979,7 +979,7 @@ public class C206_CaseStudy {
 		if (packageList.size() != 0) {
 			String packageid = Helper.readString("Enter Package ID > ");
 			for (Package p : packageList) {
-				if (p.getPackagecode() == (packageid)) {
+				if (p.getPackagecode().equals(packageid)) {
 					p1 = p;
 
 				}
