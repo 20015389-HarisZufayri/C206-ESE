@@ -368,7 +368,7 @@ public class C206_CaseStudy {
 
 	public static void deleteQuote(ArrayList<Quote> quoteList, Quote q1) {
 		if (q1 != null && quoteList.remove(q1)) {
-			System.out.println("User successfully deleted");
+			System.out.println("Quotation successfully deleted");
 		} else {
 			System.out.println("Invalid user for deletion");
 		}
