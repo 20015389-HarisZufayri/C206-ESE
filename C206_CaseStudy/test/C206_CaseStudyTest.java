@@ -49,8 +49,8 @@ public class C206_CaseStudyTest {
 		q1 = new Quote("5", "5", "Kitchen", "Tiles - $3000", "Kuro", "12-08-2021", "3000.00");
 		q2 = new Quote("7", "7", "Bedroom", "Windows - $2000", "Kyo", "04-09-2021", "2000.00");
 
-		p1 = new Package("K100", "Fragile", "14-8-2021", "16-8-2021", 3);
-		p2 = new Package("I200", "Sturdy", "21-8-2021", "25-8-2021", 8);
+		p1 = new Package("K100", "Fragile", "14-08-2021", "16-08-2021", 3);
+		p2 = new Package("I200", "Sturdy", "21-08-2021", "25-08-2021", 8);
 
 		r1 = new Request(7, "HDB", 999, "ReqOne", "9395-9352", "haris@gmail.com", "9999.99", "23-08-2021", "Room", 3, 2,
 				"Gothic", "Urgent", "18-07-2020");
@@ -282,8 +282,8 @@ public class C206_CaseStudyTest {
 		assertEquals(2, packageList.size());
 
 		allPackage = C206_CaseStudy.retrieveAllPackage(packageList);
-		testOutput = String.format("%-10s %-30s %-10s %-10s %-10d\n", "K100", "Fragile", "14-8-2021", "16-8-2021", 3);
-		testOutput += String.format("%-10s %-30s %-10s %-10s %-10d\n", "I200", "Sturdy", "21-8-2021", "25-8-2021", 8);
+		testOutput = String.format("%-10s %-30s %-10s %-10s %-10d\n", "K100", "Fragile", "14-08-2021", "16-08-2021", 3);
+		testOutput += String.format("%-10s %-30s %-10s %-10s %-10d\n", "I200", "Sturdy", "21-08-2021", "25-08-2021", 8);
 
 		assertEquals(testOutput, allPackage);
 

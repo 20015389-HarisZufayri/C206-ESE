@@ -26,7 +26,9 @@ public class C206_CaseStudy {
 		appList.add(new Appointment("Shino", "06-05-2021", 1500, "Kuro", "River Valley 2510"));
 
 		quoteList.add(new Quote("1", "1", "Kitchen", "Tiles - $3000", "Kuro", "12-08-2021", "3000.00"));
-		packageList.add(new Package("W100", "Fragile", "12-8-2021", "16-8-2021", 5));
+		
+		packageList.add(new Package("W100", "Fragile", "12-08-2021", "16-08-2021", 5));
+		
 		requestList.add(new Request(7, "HDB", 999, "ReqOne", "9395-9352", "haris@gmail.com", "9999.99", "23-08-2021",
 				"Room", 3, 2, "Gothic", "Urgent", "18-07-2020"));
 
@@ -865,55 +867,85 @@ public class C206_CaseStudy {
 		if (type.equals("Name")) {
 			String patternName = "\\D{3,}";
 			check = Pattern.matches(patternName, input);
+			
 		} else if (type.equals("Mobile")) {
 			String patternMobile = "[89]\\d{3}-\\d{4}";
 			check = Pattern.matches(patternMobile, input);
+			
 		} else if (type.equals("Email")) {
 			String patternEmail = "^\\S+@\\S+\\.\\S+$";
 			check = Pattern.matches(patternEmail, input);
+			
 		} else if (type.equals("Role")) {
 			String patternRole = "\\b(Customer\\b|Client\\b|Designer)\\b";
 			check = Pattern.matches(patternRole, input);
+			
 		} else if (type.equals("Address")) {
 			String patternAddress = "\\D{1,}";
 			check = Pattern.matches(patternAddress, input);
+			
 		} else if (type.equals("Date")) {
 			String patternDate = "^(0[1-9]|[12][0-9]|3[01])[-](0[1-9]|1[012])[-](19|20)\\d\\d$";
 			check = Pattern.matches(patternDate, input);
+			
 		} else if (type.equals("Time")) {
 			String patternTime = "^([01][0-9]|2[0-3])([0-5][0-9])$";
 			check = Pattern.matches(patternTime, input);
+			
 		} else if (type.equals("Request ID")) {
 			String patternRid = "\\d+";
 			check = Pattern.matches(patternRid, input);
+			
 		} else if (type.equals("Quotation ID")) {
 			String patternQid = "\\d+";
 			check = Pattern.matches(patternQid, input);
+			
 		} else if (type.equals("Total Quotation Amount")) {
 			String patternTqo = "^[\\d]+[\\.][\\d]{2}$";
 			check = Pattern.matches(patternTqo, input);
+			
 		} else if (type.equals("Reno Cat")) {
 			String patternRec = "\\b(Bedroom\\b|Kitchen\\b|Living Room)\\b";
 			check = Pattern.matches(patternRec, input);
+			
 		} else if (type.equals("Reno Des")) {
 			String patternRed = ".*";
 			check = Pattern.matches(patternRed, input);
+			
 		} else if (type.equals("Property Type")) {
 			String patternProperty = "\\b(HDB\\b|Private\\b|Landed)\\b";
 			check = Pattern.matches(patternProperty, input);
+			
 		} else if (type.equals("Area Size")) {
 			String patternAreaSize = "^([1-9][0-9]{0,2}|1000)$";
 			check = Pattern.matches(patternAreaSize, input);
+			
 		} else if (type.equals("Renovation Type")) {
 			String patternRenType = "\\b(Whole House\\b|Room\\b|Kitchen\\b|Toilet)\\b";
 			check = Pattern.matches(patternRenType, input);
+			
 		} else if (type.equals("Number of Items")) {
 			String patternNoOfItems = "^[0-9]|[1-9][0-9]";
 			check = Pattern.matches(patternNoOfItems, input);
+			
 		} else if (type.equals("Status")) {
 			String patternStatus = "\\b(Urgent\\b|Okay)\\b";
 			check = Pattern.matches(patternStatus, input);
+			
+		}else if (type.equals("Package ID")) {
+			String patternStatus = "\\D\\d{3}";
+			check = Pattern.matches(patternStatus, input);
+			
+		}else if (type.equals("Package Type")) {
+			String patternStatus = "\\D{1,}";
+			check = Pattern.matches(patternStatus, input);
+			
+		}else if (type.equals("Total Package Amount")) {
+			String patternStatus = "\\d{1,}";
+			check = Pattern.matches(patternStatus, input);
 		}
+		
+		
 		return check;
 	}
 
@@ -979,9 +1011,9 @@ public class C206_CaseStudy {
 		if (packageList.size() != 0) {
 			String packageid = Helper.readString("Enter Package ID > ");
 			for (Package p : packageList) {
-				if (p.getPackagecode() == (packageid)) {
+				if (p.getPackagecode().equals(packageid)) {
 					p1 = p;
-
+					break;
 				}
 			}
 		} else {
@@ -1006,11 +1038,11 @@ public class C206_CaseStudy {
 		// test
 
 		String packageid = Helper.readString("Enter Package ID > ");
-		boolean packageidCheck = validInput("Request ID", packageid);
+		boolean packageidCheck = validInput("Package ID", packageid);
 
 		if (packageidCheck != true) {
 			packageid = Helper.readString("Enter Package ID > ");
-			packageidCheck = validInput("Request ID", packageid);
+			packageidCheck = validInput("Package ID", packageid);
 		}
 
 		String packageDesc = Helper.readString("Enter Package Description > ");
