@@ -370,7 +370,7 @@ public class C206_CaseStudy {
 		if (q1 != null && quoteList.remove(q1)) {
 			System.out.println("Quotation successfully deleted");
 		} else {
-			System.out.println("Invalid user for deletion");
+			System.out.println("Invalid quotation for deletion");
 		}
 
 	}
