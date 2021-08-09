@@ -1076,7 +1076,7 @@ public class C206_CaseStudy {
 			amount = Helper.readInt("Enter Total Package Amount > ");
 			amountCheck = validInput("Total Package Amount", String.valueOf(amount));
 		}
-
+		//Test
 		p1 = new Package(packageid, packageDesc, packageStart, packageEnd, amount);
 
 		return p1;

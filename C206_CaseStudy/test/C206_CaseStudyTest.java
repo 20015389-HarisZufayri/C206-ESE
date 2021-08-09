@@ -288,7 +288,7 @@ public class C206_CaseStudyTest {
 		assertEquals(testOutput, allPackage);
 
 	}
-
+	//Test
 	@Test
 	public void deletePackageTest() { // T
 		assertNotNull(packageList);
