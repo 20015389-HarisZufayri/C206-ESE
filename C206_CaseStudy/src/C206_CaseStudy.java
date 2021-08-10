@@ -657,6 +657,7 @@ public class C206_CaseStudy {
 		}
 		return u1;
 	}
+	//test
 
 	public static void deleteUser(ArrayList<User> userList, User u1) {
 		if (u1 != null && userList.remove(u1)) {
