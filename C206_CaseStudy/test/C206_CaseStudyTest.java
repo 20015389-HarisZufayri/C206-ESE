@@ -259,6 +259,7 @@ public class C206_CaseStudyTest {
 
 	@Test
 	public void addPackageTest() {// T
+		assertNotNull(packageList);
 		C206_CaseStudy.addPackage(packageList, p1);
 		assertEquals(1, packageList.size());
 		assertSame(p1, packageList.get(0));
