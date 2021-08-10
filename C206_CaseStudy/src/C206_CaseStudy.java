@@ -645,24 +645,15 @@ public class C206_CaseStudy {
 	// ---<< MANAGE USER: DELETE USER >>---// Done by: Yolanda
 	public static User inputDeleteUser() {
 		User u1 = null;
-		boolean dUser = false;
 		if (userList.size() != 0) {
 			String name = Helper.readString("Enter name > ");
 			for (User u : userList) {
 				if (u.getName().equals(name)) {
 					u1 = u;
-					dUser = true;
-				}
-				else {
-					dUser = false;
 				}
 			}
 		} else {
 			System.out.println("There are no users");
-		}
-		
-		if (dUser == false) {
-			System.out.println("User is not registered user");
 		}
 		return u1;
 	}
